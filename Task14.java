@@ -4,8 +4,10 @@
  */
 public class Task14 {
     public static void main(String[] args) {
-        for (int i = 1; i < 110 ; i += 2) {
-            System.out.println(i);
+        int n = 1;
+        for (int i = 0; i < 55 ; i++) {
+            System.out.println(n);
+            n += 2;
         }
     }
 }
