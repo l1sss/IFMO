@@ -11,7 +11,11 @@ public class Task24 {
         for (int h = 0; h < 24; h++) {
             for (int m = 0; m < 59; m++) {
                 if (h / 10 % 10 == m % 10 & h % 10 == m / 10 % 10)
+                {
                     count ++;
+//                    System.out.println(count + "    " + h + ":" + m);
+                    System.out.printf("%02d -> %02d:%02d\n", count, h, m);
+                }
             }
         }
         System.out.println("Число симметричных комбинаций = " + count);
