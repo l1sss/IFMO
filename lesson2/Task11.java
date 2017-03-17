@@ -1,3 +1,6 @@
+package lesson2;
+
+import java.util.Arrays;
 /*
 В три переменные a, b и c явно записаны программистом три целых попарно неравных
 между собой числа. Создать программу, которая переставит числа в переменных таким
@@ -10,28 +13,19 @@
 Числа в переменных a, b и c: 7, 0, -5
 Возрастающая последовательность: -5, 0, 7
 */
-public class Task11b {
+public class Task11 {
     public static void main(String[] args) {
         int a = 7;
         int b = 0;
         int c = -5;
-        int tmp;
 
-        if (a > b) {
-            tmp = a;
-            a = b;
-            b = tmp;
-        }
-        if (a > c) {
-            tmp = a;
-            a = c;
-            c = tmp;
-        }
-        if (b > c) {
-            tmp = b;
-            b = c;
-            c = tmp;
-        }
+        int[] arr = {a, b, c};
+        Arrays.sort(arr);
+
+        a = arr[0];
+        b = arr[1];
+        c = arr[2];
+
         System.out.print(a + ", " + b + ", " + c);
     }
 }

@@ -1,3 +1,5 @@
+package lesson1;
+
 import java.util.Scanner;
 /*
 В переменной n хранится натуральное трёхзначное число.

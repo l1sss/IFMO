@@ -1,3 +1,5 @@
+package lesson1;
+
 import java.util.Scanner;
 /*
 Напишите программу, которая выводит true, если число четное и false, если нет.
