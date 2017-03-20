@@ -1,6 +1,6 @@
 package lesson3;
 
-public class Task26b {
+public class Crypt2 {
     public static void main(String[] args) {
         String stext = "Hello world!";
         String skey = "secretKey";

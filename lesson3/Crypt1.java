@@ -2,7 +2,7 @@ package lesson3;
 /*
 Шифровка XOR'ом
  */
-public class Task26 {
+public class Crypt1 {
     public static void main(String[] args) {
         String text = "hello";
         byte key = 42;
