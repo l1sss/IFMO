@@ -8,7 +8,7 @@ import java.util.Arrays;
 public class BinarySearch {
     public static void main(String[] args) {
         int[] arr = {4, 10, 8, 35, 7};
-        int x = 8; //искомое значение
+        int x = 35; //искомое значение
         Arrays.sort(arr);
         if (bSearch(x, arr) == -1) System.out.println("Значение не найдено");
         else
