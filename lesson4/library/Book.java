@@ -3,47 +3,31 @@ package lesson4.library;
 /**
  * Created by l1s on 21.03.17.
  */
-public class Book {
-    private String author;
+public class Book extends Item {
     private String title;
+    private String author;
     private int pagesNum;
 
-    public Book(String author, String title, int pagesNum) {
-        this.author = author;
+    public Book(String title, String author, int pagesNum) {
         this.title = title;
+        this.author = author;
         this.pagesNum = pagesNum;
-    }
-
-    public String getAuthor(Book book) {
-        return author;
     }
 
     public String getTitle(Book book) {
         return title;
     }
 
+    public String getAuthor(Book book) {
+        return author;
+    }
+
     public int getPagesNum(Book book) {
         return pagesNum;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPagesNum(int pagesNum) {
-        this.pagesNum = pagesNum;
-    }
-
     @Override
     public String toString() {
-        return "Book{" +
-                "author='" + author + '\'' +
-                ", title='" + title + '\'' +
-                ", pagesNum=" + pagesNum +
-                '}';
+        return title + ", " + author;
     }
 }

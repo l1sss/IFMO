@@ -25,7 +25,6 @@ public class Library {
         for (int i = 0; i < books.length; i++) {
             if (books[i] == null) freePlaces++;
         }
-
         if(freePlaces < quantity) System.out.println("Мы не можем принять такое кол-во книг." +
                 "\nСвободных мест: " + freePlaces);
         else {
@@ -37,7 +36,8 @@ public class Library {
                 }
                 if (accepted == quantity) break;
             }
-            System.out.println("Наша библиотека приняла книг в кол-ве " + quantity + " шт. " +
+            book.cntUp(quantity);
+            System.out.println("Принято: " + book + ", " + quantity + " шт. " +
                     "Осталось свободных мест " + (freePlaces - quantity) + ".");
         }
     }
@@ -47,17 +47,12 @@ public class Library {
         if (quantity <= 0) System.out.println("Вы ошиблись");
 
         //проверяем есть ли такая книга в нашей библиотеке в доступном количестве
-        int realQuantity = 0;
-        for (int i = 0; i < books.length; i++) {
-            if (book.equals(books[i])) realQuantity++;
-        }
-
-        if (realQuantity == 0) {
+        if (book.getCounter() == 0) {
             System.out.println("У нас нет такой книги.");
             return 0;
-        } else if (realQuantity > 0 && realQuantity < quantity) {
+        } else if (book.getCounter() > 0 && book.getCounter() < quantity) {
             System.out.println("У нас нет данной книги" +
-                    " в таком количестве. " + "Настоящее количество " + realQuantity);
+                    " в таком количестве. " + "Настоящее количество " + book.getCounter());
             return 1;
         } else {
             int accepted = 0;
@@ -68,7 +63,8 @@ public class Library {
                 }
                 if (accepted == quantity) break;
             }
-            System.out.println("Вы получили книгу в количестве " + quantity + " шт.");
+            System.out.println("Выдано: " + book + ", " + quantity + " шт.");
+            book.cntDown(quantity);
             return quantity;
         }
     }
@@ -76,6 +72,7 @@ public class Library {
 //смотрим всю библиотеку
     public void showBooks() {
         for (Book b : books) {
+            if (b == null) continue;
             System.out.println(b);
         }
     }

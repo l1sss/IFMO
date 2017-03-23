@@ -8,11 +8,15 @@ public class Main {
     public static void main(String[] args) {
         Library library = new Library();
 
-        Book bukvar = new Book("Zhukova", "bukvar", 91);
-        Book code = new Book("Petzold", "code", 512);
+        Book bukvar = new Book("Букварь", "Жукова Н.", 91);
+        Book code = new Book("Тайный язык программирования", "Петцольд Ч.", 512);
         library.put(bukvar, 3);
-        library.put(code, 2);
+        System.out.println(bukvar.getCounter());
+        library.put(code, 1);
         library.get(code, 1);
+        library.get(bukvar, 1);
+        System.out.println(bukvar.getCounter());
+        library.get(bukvar, 3);
         library.showBooks();
     }
 }
