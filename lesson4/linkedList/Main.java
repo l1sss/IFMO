@@ -6,9 +6,13 @@ package lesson4.linkedList;
 public class Main {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        System.out.println(list.get(1));
+        list.add("Кирилл");
+        list.add("не");
+        list.add("любит");
+        list.add("есть");
+        list.add("в");
+        list.add("Маке");
+        list.remove("не");
+        list.print();
     }
 }

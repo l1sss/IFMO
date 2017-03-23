@@ -4,29 +4,67 @@ package lesson4.linkedList;
  * Created by l1s on 22.03.17.
  */
 public class LinkedList {
-    Item head;//начало
+    private Item head;//указатель на первый элемент
+    private Item tail;//указатель на последний элемент
+    private int size;
 
-//создание списка
-    public void add(String s) {
-        if(head == null)//если головы нет,
-            head = new Item(s);//то созданный элемент будет головой списка
+//добавление элемента
+    public void add(String value) {
+        Item item = new Item(value);
+
+        if (head == null) {
+            head = item;
+            tail = item;
+        }
         else {
-            Item last = head;//если голова есть, шагаем от головы
-            while (true) {
-                if (last.next() != null) last = last.next();//если следующего элемента нет,
-                else break;                                 //значит мы реально в последнем элементе
+            tail.next = item;
+            tail = item;
+        }
+        size++;
+    }
+
+//удаление элемента по значению
+    public void remove(String value) {
+        if (head == null) return; //список пуст, расходимся
+
+        if (head == tail) { //в списке только один элемент
+            head = null;
+            tail = null;
+            size--;
+            return;
+        }
+
+        if (head.getValue().equals(value)) { //если первый элемент - наш, то перекидываем ссылку на следующий за головой элемент
+            head = head.next;
+            size--;
+            return;
+        }
+
+//во всех остальных случаях
+        Item it = head;
+        while (it.next != null) { //итерируемся, пока следующий элемент существует
+            if (it.next.getValue().equals(value)) { //проверяем следующий элемент
+                if (tail == it.next) { //если он последний
+                    tail = it; //перекидываем указатель хвоста на текущтй элемент
+                }
+                it.next = it.next.next; //перекидываем ссылку через найденный элемент
+                size--;
+                return;
             }
-            last.next = new Item(s);//наш новый итем встаёт на первое пустое место
+            it = it.next; //иначе шагаем дальше
         }
     }
 
-    public String get(int x) {
-        Item tmp = head;//считаем от головы
-        for (int i = 0; i < x; i++) {
-            tmp = tmp.next;
+    public void print() {
+        Item it = head;
+
+        while(it != null) {
+            System.out.println(it);
+            it = it.next;
         }
-        return tmp.getValue();
     }
 
-
+    public int getSize() {
+        return size;
+    }
 }
