@@ -14,6 +14,7 @@ public class Book extends Item {
         this.pagesNum = pagesNum;
     }
 
+
     public String getTitle(Book book) {
         return title;
     }
@@ -24,6 +25,26 @@ public class Book extends Item {
 
     public int getPagesNum(Book book) {
         return pagesNum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (pagesNum != book.pagesNum) return false;
+        if (!title.equals(book.title)) return false;
+        return author.equals(book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + pagesNum;
+        return result;
     }
 
     @Override

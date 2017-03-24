@@ -51,8 +51,8 @@ public class Library {
             System.out.println("У нас нет такой книги.");
             return 0;
         } else if (book.getCounter() > 0 && book.getCounter() < quantity) {
-            System.out.println("У нас нет данной книги" +
-                    " в таком количестве. " + "Настоящее количество " + book.getCounter());
+            System.out.println("У нас нет книги: " + book +
+                    " в количестве " + quantity + " шт. Доступное количество " + book.getCounter() + " шт.");
             return 1;
         } else {
             int accepted = 0;
@@ -71,9 +71,15 @@ public class Library {
 
 //смотрим всю библиотеку
     public void showBooks() {
-        for (Book b : books) {
-            if (b == null) continue;
-            System.out.println(b);
+        System.out.println("Доступные книги: ");
+        int available = 0;
+        for (int i = 0; i < books.length; i++) {
+            if (books[i] != null) {
+                System.out.println(books[i]);
+                available++;
+            }
+            else if (i == books.length -1 && available == 0)
+                System.out.println("Библиотека пуста.");
         }
     }
 }
