@@ -1,4 +1,4 @@
-package lesson5.Shapes.Shapes;
+package lesson5.Shapes;
 
 
 /**

@@ -1,10 +1,11 @@
-package lesson5.Shapes.Shapes;
+package lesson5.Shapes;
 
 /**
- * Created by l1s on 23.03.17.
+ * Created by l1s on 24.03.17.
  */
 public class Main {
     public static void main(String[] args) {
-        Square square = new Square(4, 3);
+        Square sq = new Square(4, 3);
+        System.out.println(sq.getPerimetr());
     }
 }

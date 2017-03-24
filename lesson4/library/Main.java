@@ -13,8 +13,6 @@ public class Main {
         library.showBooks();
         library.put(bukvar, 3);
         library.put(code, 1);
-        library.get(bukvar, 4);
-        library.get(bukvar, 1);
         library.showBooks();
     }
 }
