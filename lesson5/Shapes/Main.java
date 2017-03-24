@@ -1,4 +1,4 @@
-package lesson5;
+package lesson5.Shapes.Shapes;
 
 /**
  * Created by l1s on 23.03.17.
