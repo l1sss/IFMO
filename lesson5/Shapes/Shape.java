@@ -3,12 +3,8 @@ package lesson5.Shapes;
 /**
  * Created by l1s on 22.03.17.
  */
-public class Shape {
-    public int getPerimetr(int a){
-        return 0;
-    }
+public interface Shape {
+    public int getPerimetr();
 
-    public int getAreal(int a){
-        return 0;
-    }
+    public int getArea();
 }

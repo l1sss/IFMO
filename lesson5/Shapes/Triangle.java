@@ -3,7 +3,7 @@ package lesson5.Shapes;
 /**
  * Created by l1s on 22.03.17.
  */
-public class Triangle extends Shape {
+public class Triangle implements Shape {
     private int a;
     private int b;
     private int c;

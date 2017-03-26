@@ -1,4 +1,4 @@
-package lesson4.linkedList;
+package lesson4.library;
 
 /**
  * Created by l1s on 22.03.17.
@@ -8,9 +8,9 @@ public class LinkedList {
     private Item tail;//указатель на последний элемент
     private int size;
 
-//добавление элемента
-    public void add(String value) {
-        Item it = new Item(value);
+//добавление элемента в конец
+    public void add(Book book, int quantity) {
+        Item it = new Item(book, quantity);
 
         if (head == null) {
             head = it;
@@ -23,8 +23,30 @@ public class LinkedList {
         size++;
     }
 
+//вставка элемента в начало
+    public void push(Book book, int quantity) {
+        Item next = head;
+        head = new Item(book, quantity);
+        head.next = next;
+        size++;
+    }
+
+//поиск элемента по значению
+    public Item get(Book book) {
+        if (head == null) return null;
+
+        if (head.value().equals(book)) return head;
+
+        Item it = head;
+        while(it.next != null) {
+            if (it.next.value().equals(book)) return it.next;
+            it = it.next;
+        }
+        return null;
+    }
+
 //удаление элемента по значению
-    public void remove(String value) {
+    public void remove(Book book) {
         if (head == null) return; //список пуст, расходимся
 
         if (head == tail) { //в списке только один элемент
@@ -34,7 +56,7 @@ public class LinkedList {
             return;
         }
 
-        if (head.getValue().equals(value)) { //если первый элемент - наш, то перекидываем ссылку на следующий за головой элемент
+        if (head.value().equals(book)) { //если первый элемент - наш, то перекидываем ссылку на следующий за головой элемент
             head = head.next;
             size--;
             return;
@@ -43,7 +65,7 @@ public class LinkedList {
 //во всех остальных случаях
         Item it = head;
         while (it.next != null) { //итерируемся, пока следующий элемент существует
-            if (it.next.getValue().equals(value)) { //проверяем следующий элемент
+            if (it.next.value().equals(book)) { //проверяем следующий элемент
                 if (tail == it.next) { //если он последний
                     tail = it; //перекидываем указатель хвоста на текущтй элемент
                 }
@@ -55,11 +77,21 @@ public class LinkedList {
         }
     }
 
+    public boolean contains(Book book) {
+        Item it = head;
+
+        while (it != null) {
+            if(it.value().equals(book)) return true;
+            it = it.next;
+        }
+        return false;
+    }
+
     public void print() {
         Item it = head;
 
         while(it != null) {
-            System.out.println(it);
+            System.out.println(it + "   " + it.getCount());
             it = it.next;
         }
     }

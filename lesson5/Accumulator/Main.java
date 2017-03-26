@@ -5,11 +5,8 @@ package lesson5.Accumulator;
  */
 public class Main {
     public static void main(String[] args) {
-        Accumulator acc2 = new Accumulator(new Mult());
-        System.out.println(acc2.getValue());
-        acc2.setValue(3);
-        System.out.println(acc2.getValue());
-        acc2.calculate(2);
+        Accumulator acc2 = new Accumulator(new Pow(), 4);
+        acc2.calculate(3);
         System.out.println(acc2.getValue());
     }
 }

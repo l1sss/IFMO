@@ -4,7 +4,7 @@ package lesson5.Shapes;
 /**
  * Created by l1s on 22.03.17.
  */
-public class Circle extends Shape {
+public class Circle implements Shape {
     int r;
 
     public Circle(int r) {
@@ -15,7 +15,7 @@ public class Circle extends Shape {
         return (int)(2 * Math.PI * r);
     }
 
-    public int getAreal() {
+    public int getArea() {
         return (int)(Math.PI * (r * r));
     }
 }

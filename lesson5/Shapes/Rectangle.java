@@ -3,7 +3,7 @@ package lesson5.Shapes;
 /**
  * Created by l1s on 22.03.17.
  */
-public class Rectangle extends Shape {
+public class Rectangle implements Shape {
     protected int a;
     protected int b;
 
@@ -16,7 +16,7 @@ public class Rectangle extends Shape {
         return (a + b) * 2;
     }
 
-    public int gatArea() {
+    public int getArea() {
         return a * b;
     }
 }

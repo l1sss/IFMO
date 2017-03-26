@@ -3,7 +3,7 @@ package lesson4.library;
 /**
  * Created by l1s on 21.03.17.
  */
-public class Book extends Item {
+public class Book {
     private String title;
     private String author;
     private int pagesNum;
@@ -12,19 +12,6 @@ public class Book extends Item {
         this.title = title;
         this.author = author;
         this.pagesNum = pagesNum;
-    }
-
-
-    public String getTitle(Book book) {
-        return title;
-    }
-
-    public String getAuthor(Book book) {
-        return author;
-    }
-
-    public int getPagesNum(Book book) {
-        return pagesNum;
     }
 
     @Override
