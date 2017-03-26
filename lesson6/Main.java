@@ -1,4 +1,6 @@
-package lesson6.Stack;
+package lesson6;
+
+import java.util.Iterator;
 
 /**
  * Created by xmitya on 20.03.17.
@@ -13,6 +15,12 @@ public class Main {
 
         for (Object s : list) {
             System.out.println(s);
+        }
+
+        Iterator iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Object val = iterator.next();
+            System.out.println(val);
         }
     }
 }

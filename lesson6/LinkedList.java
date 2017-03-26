@@ -1,4 +1,4 @@
-package lesson6.Stack;
+package lesson6;
 
 
 import java.util.Iterator;
@@ -9,10 +9,10 @@ import java.util.Iterator;
 public class LinkedList implements List, Stack{
     private Item head;
 
-    public void push(Object object) {
+    public void push(Object o) {
         Item next = head;
 
-        head = new Item(object);
+        head = new Item(o);
 
         head.next = next;
     }
@@ -21,9 +21,9 @@ public class LinkedList implements List, Stack{
         return remove(0);
     }
 
-    public void add(Object object) {
+    public void add(Object o) {
         if (head == null) {
-            head = new Item(object);
+            head = new Item(o);
 
             return;
         }
@@ -32,7 +32,7 @@ public class LinkedList implements List, Stack{
             Item next = prev.next;
 
             if (next == null) {
-                prev.next = new Item(object);
+                prev.next = new Item(o);
 
                 return;
             }

@@ -1,4 +1,4 @@
-package lesson6.Stack;
+package lesson6;
 
 /**
  * Created by l1s on 24.03.17.

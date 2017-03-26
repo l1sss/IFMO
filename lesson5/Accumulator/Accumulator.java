@@ -4,23 +4,21 @@ package lesson5.Accumulator;
  * Created by l1s on 24.03.17.
  */
 public class Accumulator {
-    private Operation operation;
-    private double value;
+    private double[] value;
+    private Operation[] operation;
 
-    public Accumulator(Operation operation, double value) {
-        this.operation = operation;
+    public Accumulator(double[] value, Operation[] operation) {
         this.value = value;
-    }
-
-    public Accumulator(Operation operation) {
         this.operation = operation;
     }
 
-    public void calculate(double d) {
-        value = operation.apply(value, d);
+    public void calculate(int n) {
+        for (int i = 0; i < value.length; i++) {
+            value[i] = operation[i].apply(value[i], n);
+        }
     }
 
-    public double getValue() {
+    public double[] getValue() {
         return value;
     }
 }

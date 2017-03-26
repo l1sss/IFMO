@@ -1,4 +1,4 @@
-package lesson6.Stack;
+package lesson6;
 
 import java.util.Iterator;
 

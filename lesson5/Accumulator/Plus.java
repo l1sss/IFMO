@@ -8,14 +8,4 @@ public class Plus implements Operation {
     public double apply(double a, int b) {
         return a + b;
     }
-
-    @Override
-    public double apply(double a, long b) {
-        return a + b;
-    }
-
-    @Override
-    public double apply(double a, double b) {
-        return a + b;
-    }
 }

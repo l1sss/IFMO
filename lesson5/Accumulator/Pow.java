@@ -8,14 +8,4 @@ public class Pow implements Operation {
     public double apply(double a, int b) {
         return Math.pow(a, b);
     }
-
-    @Override
-    public double apply(double a, long b) {
-        return Math.pow(a, b);
-    }
-
-    @Override
-    public double apply(double a, double b) {
-        return Math.pow(a, b);
-    }
 }
