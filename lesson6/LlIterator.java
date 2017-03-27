@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class LlIterator implements Iterator {
     Item next;
 
-    public LlIterator(Item next) {
+    LlIterator(Item next) {
         this.next = next;
     }
 

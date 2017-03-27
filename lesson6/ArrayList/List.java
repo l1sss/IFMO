@@ -1,7 +1,7 @@
-package lesson6;
+package lesson6.ArrayList;
 
 /**
- * Created by l1s on 24.03.17.
+ * Created by l1s on 27.03.17.
  */
 public interface List extends Iterable {
     void add(Object o);
