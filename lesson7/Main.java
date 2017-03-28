@@ -26,7 +26,7 @@ public class Main {
             }
         });
 
-        acc2.calculate(3);
+        acc2.calculate(4);
         System.out.println(acc2.getValue());
     }
 }
