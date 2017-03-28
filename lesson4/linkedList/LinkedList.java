@@ -3,27 +3,28 @@ package lesson4.linkedList;
 /**
  * Created by l1s on 22.03.17.
  */
+
+//СВЯЗНЫЙ СПИСОК
 public class LinkedList {
     private Item head;//указатель на первый элемент
     private Item tail;//указатель на последний элемент
     private int size;
 
-//добавление элемента
+    //добавление элемента
     public void add(String value) {
         Item it = new Item(value);
 
         if (head == null) {
             head = it;
             tail = it;
-        }
-        else {
+        } else {
             tail.next = it;
             tail = it;
         }
         size++;
     }
 
-//удаление элемента по значению
+    //удаление элемента по значению
     public void remove(String value) {
         if (head == null) return; //список пуст, расходимся
 
@@ -58,7 +59,7 @@ public class LinkedList {
     public void print() {
         Item it = head;
 
-        while(it != null) {
+        while (it != null) {
             System.out.println(it);
             it = it.next;
         }
@@ -66,5 +67,24 @@ public class LinkedList {
 
     public int getSize() {
         return size;
+    }
+
+//УЗЕЛ СВЯЗНОГО СПИСКА
+    private static class Item {
+        Item next; //указатель на следующий элемент
+        private String value; //данные, можно взять всё, что душе угодно... В данном случае строка
+
+        public Item(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override   //когда печатаем наш Item, выводится его значение
+        public String toString() {
+            return value;
+        }
     }
 }

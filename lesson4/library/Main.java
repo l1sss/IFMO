@@ -5,7 +5,7 @@ package lesson4.library;
  */
 public class Main {
     public static void main(String[] args) {
-        Library lib = new Library();
+        Library lib = new Library(5);
 
         Book bukvar = new Book("Букварь", "Жукова Н.", 91);
         Book code = new Book("Тайный язык программирования", "Петцольд Ч.", 512);

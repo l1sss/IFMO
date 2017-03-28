@@ -5,6 +5,8 @@ import java.util.Iterator;
 /**
  * Created by l1s on 27.03.17.
  */
+
+//ДИНАМИЧЕСКИЙ МАССИВ
 public class ArrayList implements List {
     private Object[] elementData;
     private int capacity = 10; //вместимость по умолчанию
@@ -48,5 +50,25 @@ public class ArrayList implements List {
 
     public int size() {
         return size;
+    }
+
+//ИТЕРАТОР
+    private class ALIterator implements Iterator {
+        private Object[] array;
+        private int index = 0;
+
+        ALIterator(Object[] array) {
+            this.array = array;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < array.length && array[index] != null;
+        }
+
+        @Override
+        public Object next() {
+            return array[index++];
+        }
     }
 }

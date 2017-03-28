@@ -17,6 +17,8 @@ public class Main {
             System.out.println(s);
         }
 
+        System.out.println();
+
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
             Object val = iterator.next();

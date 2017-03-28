@@ -6,7 +6,7 @@ import java.util.Iterator;
 /**
  * Created by xmitya on 20.03.17.
  */
-public class LinkedList implements List, Stack{
+public class LinkedList implements List, Stack {
     private Item head;
 
     public void push(Object o) {
@@ -28,7 +28,7 @@ public class LinkedList implements List, Stack{
             return;
         }
 
-        for (Item prev = head;;) {
+        for (Item prev = head; ; ) {
             Item next = prev.next;
 
             if (next == null) {
@@ -50,7 +50,7 @@ public class LinkedList implements List, Stack{
 
         int cnt = 1;
 
-        for (Item prev = head;;) {
+        for (Item prev = head; ; ) {
             Item next = prev.next;
 
             if (next == null)
@@ -77,7 +77,7 @@ public class LinkedList implements List, Stack{
 
         int cnt = 1;
 
-        for (Item prev = head;;) {
+        for (Item prev = head; ; ) {
             Item next = prev.next;
 
             if (next == null)
@@ -96,8 +96,37 @@ public class LinkedList implements List, Stack{
         }
     }
 
+    private class Item {
+        Object value;
+        Item next;
+
+        Item(Object value) {
+            this.value = value;
+        }
+    }
+
     @Override
     public Iterator iterator() {
         return new LlIterator(head);
+    }
+
+    public class LlIterator implements Iterator {
+        Item next;
+
+        LlIterator(Item next) {
+            this.next = next;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        @Override
+        public Object next() {
+            Item next = this.next;
+            this.next = next.next;
+            return next.value;
+        }
     }
 }
