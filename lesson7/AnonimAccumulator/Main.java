@@ -1,4 +1,4 @@
-package lesson7;
+package lesson7.AnonimAccumulator;
 
 /**
  * Created by l1s on 28.03.17.

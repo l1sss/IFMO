@@ -9,4 +9,6 @@ public interface List extends Iterable {
     Object get(int index0);
 
     Object remove(int index);
+
+    int size();
 }
