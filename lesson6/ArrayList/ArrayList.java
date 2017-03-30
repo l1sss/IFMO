@@ -1,5 +1,6 @@
 package lesson6.ArrayList;
 
+import lesson4.linkedList.List;
 import java.util.Iterator;
 
 /**
@@ -41,6 +42,19 @@ public class ArrayList implements List {
         System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         elementData[--size] = null;
         return oldValue;
+    }
+
+    @Override
+    public Object remove(Object value) {
+        Object oldValue;
+        for (int i = 0; i < elementData.length; i++) {
+            if(value.equals(elementData[i])) {
+                oldValue = elementData[i];
+                this.remove(i);
+                return oldValue;
+            }
+        }
+        return null;
     }
 
     @Override

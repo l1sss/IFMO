@@ -1,5 +1,6 @@
 package lesson6.ArrayList;
 
+import lesson4.linkedList.List;
 import java.util.Iterator;
 
 /**
@@ -15,6 +16,7 @@ public class Main {
 
         list.remove(0);
         list.remove(3);
+        list.remove("test1");
 
         for (Object o : list) {
             System.out.println(o);

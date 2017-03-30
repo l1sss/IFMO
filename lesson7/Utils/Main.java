@@ -1,5 +1,7 @@
 package lesson7.Utils;
 
+import lesson4.linkedList.LinkedList;
+import lesson4.linkedList.List;
 import lesson6.ArrayList.ArrayList;
 
 /**
@@ -20,7 +22,7 @@ public class Main {
 
         ArrayList list3 = new ArrayList();
         list3.add(1);
-        list3.add(12);
+        list3.add(1234);
         list3.add(3);
 
         Predicate pred = new Predicate() {
@@ -30,20 +32,19 @@ public class Main {
             }
         };
 
-        System.out.println(Utils.find(list, pred) + "\n");
+        System.out.println("*************************************FIND****************************************");
 
-        Predicate pred2 = new Predicate() {
-            @Override
-            public boolean apply(Object obj) {
-                return (obj.toString().length() == 1);
-            }
-        };
+        System.out.println(Utils.find(list, pred));
+
+        System.out.println("*************************************FILTER****************************************");
+
+        Predicate pred2 = obj -> (obj.toString().length() == 1);
 
         for (Object o : Utils.filter(list2, pred2)) {
             System.out.println(o);
         }
 
-        System.out.println();
+        System.out.println("*************************************TRANSFORMER****************************************");
 
         Transformer trans = new Transformer() {
             @Override
@@ -54,6 +55,38 @@ public class Main {
         };
 
         for (Object o : Utils.transform(list3, trans)) {
+            System.out.println(o);
+        }
+
+        System.out.println("*************************************INTERSECT****************************************");
+
+        List listA = new LinkedList();
+        listA.add("A");
+        listA.add("B");
+        listA.add("C");
+        listA.add(34);
+
+        List listB = new LinkedList();
+        listB.add("A");
+        listB.add("Z");
+        listB.add(34);
+        listB.add("a");
+        listA.add(34);
+
+        Predicate2 predA = new Predicate2() {
+            @Override
+            public boolean apply(Object o1, Object o2) {
+                return (o1.equals(o2));
+            }
+        };
+
+        for (Object o : Utils.intersect(listA, listB, predA)) {
+            System.out.println(o);
+        }
+
+        System.out.println("*************************************DIFFERENCE****************************************");
+
+        for (Object o : Utils.difference(listA, listB, predA)) {
             System.out.println(o);
         }
     }
