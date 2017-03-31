@@ -99,5 +99,7 @@ public class Main {
         for (Object o : Utils.difference(listA, listB, predA)) {
             System.out.println(o);
         }
+
+        System.out.println("*************************************DIFFERENCE****************************************");
     }
 }
