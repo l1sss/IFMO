@@ -52,9 +52,17 @@ public class Utils {
     public static List intersect(List list1, List list2, Predicate2 pred) {
         List rList = new ArrayList();
 
-        for(Object o : list1) {
-            for (int i = 0; i < list2.size(); i++) {
-                if(pred.apply(o, list2.get(i))) rList.add(o);
+        if (pred != null) {
+            for (Object o : list1) {
+                for (int i = 0; i < list2.size(); i++) {
+                    if (pred.apply(o, list2.get(i))) rList.add(o);
+                }
+            }
+        }else {
+            for (Object o : list1) {
+                for (int i = 0; i < list2.size(); i++) {
+                    if (o.equals(list2.get(i))) rList.add(o);
+                }
             }
         }
         return rList;
@@ -68,9 +76,17 @@ public class Utils {
             rList.add(o);
         }
 
-        for (int i = 0; i < list1.size(); i++) {
-            for (int j = 0; j < list2.size(); j++) {
-                if(pred.apply(list1.get(i), list2.get(j))) rList.remove(list1.get(i));
+        if (pred != null) {
+            for (int i = 0; i < list1.size(); i++) {
+                for (int j = 0; j < list2.size(); j++) {
+                    if (pred.apply(list1.get(i), list2.get(j))) rList.remove(list1.get(i));
+                }
+            }
+        }else {
+            for (int i = 0; i < list1.size(); i++) {
+                for (int j = 0; j < list2.size(); j++) {
+                    if (list1.get(i).equals(list2.get(j))) rList.remove(list1.get(i));
+                }
             }
         }
         return rList;
