@@ -4,6 +4,8 @@ import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.List;
 import lesson6.ArrayList.ArrayList;
 
+import java.io.File;
+
 /**
  * Created by l1s on 28.03.17.
  */
@@ -19,7 +21,7 @@ public class Main {
         Predicate pred = new Predicate() {
             @Override
             public boolean apply(Object obj) {
-                return ((Integer) obj > 1 && (Integer) obj < 10);
+                return ((Integer) obj == 7);
             }
         };
 
@@ -100,6 +102,41 @@ public class Main {
             System.out.println(o);
         }
 
-        System.out.println("*************************************DIFFERENCE****************************************");
+        System.out.println("*************************************FILES****************************************");
+
+        //находим файл болший 21 байта
+        Predicate predF1 = new Predicate() {
+            @Override
+            public boolean apply(Object obj) {
+                return ((File)obj).length() > 21;
+            }
+        };
+
+        //сравниваем файлы по имени
+        Predicate2 predF2 = new Predicate2() {
+            @Override
+            public boolean apply(Object o1, Object o2) {
+                return ((File)o1).getName().equals(((File)o2).getName());
+            }
+        };
+
+        File dir1 = new File("/home/l1s/dir1");
+        File dir2 = new File("/home/l1s/dir2");
+
+        List files1 = Utils.toList(dir1.listFiles()); //все файлы из директории 1
+        List files2 = Utils.toList(dir2.listFiles()); //все файлы из директории 2
+
+        System.out.println("find file > 21b " + Utils.find(files2, predF1));
+
+        List dup = Utils.intersect(files1, files2, predF2);
+        List dif = Utils.difference(files1, files2, predF2);
+
+        for (Object o : dup) {
+            System.out.println("intersect " + o);
+        }
+
+        for (Object o : dif) {
+            System.out.println("difference " + o);
+        }
     }
 }
