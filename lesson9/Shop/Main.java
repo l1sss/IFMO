@@ -10,9 +10,9 @@ public class Main {
         Shop shop = new Shop(); //создаём магазинчик
 
         //создаём продукты
-        Product cat = new Product("Кот Васян", 0, 1);
-        Product watermelon = new Product("Арбуз", 30, 2);
-        Product axe = new Product("Топор", 50, 1);
+        Product cat = new Product("Кот Васян", 0);
+        Product watermelon = new Product("Арбуз", 30);
+        Product axe = new Product("Топор", 50);
 
         //добавляем их в магазин
         shop.add(cat);
@@ -31,6 +31,7 @@ public class Main {
 
         StringBuilder builder = new StringBuilder();
         builder.append("\nСписок команд:\n" +
+                "show       посмотреть доступные товары\n" +
                 "add        добавить в корзину\n" +
                 "cart       просмотр корзины\n" +
                 "rem        удалить товар из корзины\n" +
@@ -38,30 +39,46 @@ public class Main {
                 "exit       выход\n");
         System.out.println(builder);
 
-        //добавляем товар в корзину
+        //собственно сам консольный интерфейс...
         while (true) {
             String c = sc.nextLine();
 
-            if (c.equals("show")) shop.show();
+            switch (c) {
+                case "show":
+                    shop.show();
+                    break;
 
-            else if (c.equals("add")) {
-                System.out.println("введите id товара: ");
-                int id = sc.nextInt();
-                shop.put(id);
-            }
-            else if (c.equals("cart")) shop.showCart();
+                case "add":
+                    System.out.println("введите id товара: ");
+                    int id = sc.nextInt();
+                    shop.put(id);
+                    break;
 
-            else if (c.equals("buy")) {
-                System.out.println("введите сумму: ");
-                int sum = sc.nextInt();
-                shop.buy(user.getId(), sum);
+                case "cart":
+                    shop.showCart();
+                    break;
+
+                case "buy":
+                    if (shop.getCart().size() == 0) {
+                        System.out.println("Ваша корзина пуста!");
+                    } else {
+                        System.out.println("введите сумму: ");
+                        int sum = sc.nextInt();
+                        shop.buy(user.getId(), sum);
+                    }
+                    break;
+
+                case "rem":
+                    if (shop.getCart().size() == 0) {
+                        System.out.println("Ваша корзина пуста!");
+                    } else {
+                        System.out.println("введите id товара: ");
+                        int prId = sc.nextInt();
+                        shop.remove(prId);
+                    }
+                case "exit":
+                    break;
             }
-            else if (c.equals("rem")) {
-                System.out.println("введите id товара: ");
-                int id = sc.nextInt();
-                shop.remove(id);
-            }
-            else if (c.equals("exit")) break;
         }
     }
 }

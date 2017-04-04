@@ -24,12 +24,7 @@ public class Shop {
 
     //добавить товар в магазин
     public void add(Product p) {
-        if (stock.get(p) == null) {
-            stock.add(p);
-
-            return;
-        }
-        ((Product)stock.get(p)).setQty(((Product)stock.get(p)).getQty() + p.getQty()); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        stock.add(p);
     }
 
     //добавить товар в корзину
@@ -38,6 +33,7 @@ public class Shop {
             if (((Product) o).getId() == id) {
                 cart.add(o);
                 cartPrice += ((Product) o).getPrice();
+                stock.remove(o);
                 System.out.println("Товар добавлен в корзину");
                 return;
             }
@@ -51,10 +47,12 @@ public class Shop {
             if (((Product)o).getId() == id) {
                 cart.remove(o);
                 cartPrice -= ((Product)o).getPrice();
+                stock.add(o);
                 System.out.println("Товар удалён из корзины");
                 return;
             }
         }
+        System.out.println("Товара с таким id нет в корзине");
     }
 
     //просмотр корзины
@@ -77,6 +75,10 @@ public class Shop {
             cart = new ArrayList();
             System.out.println("Спасибо за покупку!");
         }
+    }
+
+    public List getCart() {
+        return cart;
     }
 
     //просмотр магазина

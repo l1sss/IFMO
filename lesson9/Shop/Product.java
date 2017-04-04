@@ -7,12 +7,10 @@ public class Product {
     private int id;
     private String name;
     private int price;
-    private int qty;
 
-    public Product(String name, int price, int qty) {
+    public Product(String name, int price) {
         this.name = name;
         this.price = price;
-        this.qty = qty;
         this.id = Math.abs(name.hashCode() % 10_000);
     }
 
@@ -22,14 +20,6 @@ public class Product {
 
     public int getPrice() {
         return price;
-    }
-
-    public int getQty() {
-        return qty;
-    }
-
-    public void setQty(int qty) {
-        this.qty = qty;
     }
 
     @Override
@@ -52,9 +42,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return  "id=" + id +
-                ", name=" + name +
-                ", price=" + price +
-                ", qty=" + qty;
+        return  "арт." + id +
+                "   " + name +
+                "   цена=" + price;
     }
 }
