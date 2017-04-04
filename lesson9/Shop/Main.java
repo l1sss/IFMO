@@ -34,7 +34,7 @@ public class Main {
                 "show       посмотреть доступные товары\n" +
                 "add        добавить в корзину\n" +
                 "cart       просмотр корзины\n" +
-                "rem        удалить товар из корзины\n" +
+                "rm        удалить товар из корзины\n" +
                 "buy        совершить покупку\n" +
                 "exit       выход\n");
         System.out.println(builder);
@@ -68,7 +68,7 @@ public class Main {
                     }
                     break;
 
-                case "rem":
+                case "rm":
                     if (shop.getCart().size() == 0) {
                         System.out.println("Ваша корзина пуста!");
                     } else {
@@ -76,8 +76,9 @@ public class Main {
                         int prId = sc.nextInt();
                         shop.remove(prId);
                     }
-                case "exit":
                     break;
+
+                case "exit": return;
             }
         }
     }
