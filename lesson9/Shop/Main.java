@@ -7,12 +7,12 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        Shop shop = new Shop(3); //создаём магазинчик
+        Shop shop = new Shop(); //создаём магазинчик
 
         //создаём продукты
-        Product cat = new Product("Кот Васян", 0);
-        Product watermelon = new Product("Арбуз", 30);
-        Product axe = new Product("Топор", 50);
+        Product cat = new Product("Кот Васян", 0, 1);
+        Product watermelon = new Product("Арбуз", 30, 2);
+        Product axe = new Product("Топор", 50, 1);
 
         //добавляем их в магазин
         shop.add(cat);
@@ -33,6 +33,7 @@ public class Main {
         builder.append("\nСписок команд:\n" +
                 "add        добавить в корзину\n" +
                 "cart       просмотр корзины\n" +
+                "rem        удалить товар из корзины\n" +
                 "buy        совершить покупку\n" +
                 "exit       выход\n");
         System.out.println(builder);
@@ -51,11 +52,14 @@ public class Main {
             else if (c.equals("cart")) shop.showCart();
 
             else if (c.equals("buy")) {
-                System.out.println("введите свой id: ");
-                int id = sc.nextInt();
                 System.out.println("введите сумму: ");
                 int sum = sc.nextInt();
-                shop.buy(id, sum);
+                shop.buy(user.getId(), sum);
+            }
+            else if (c.equals("rem")) {
+                System.out.println("введите id товара: ");
+                int id = sc.nextInt();
+                shop.remove(id);
             }
             else if (c.equals("exit")) break;
         }

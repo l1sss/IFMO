@@ -36,6 +36,14 @@ public class ArrayList implements List {
     }
 
     @Override
+    public Object get(Object value) {
+        for (Object tmp : elementData) {
+            if (value.equals(tmp)) return value;
+        }
+        return null;
+    }
+
+    @Override
     public Object remove(int index) {
         Object oldValue = elementData[index];
         int numMoved = size - index - 1;
@@ -48,7 +56,7 @@ public class ArrayList implements List {
     public Object remove(Object value) {
         Object oldValue;
         for (int i = 0; i < elementData.length; i++) {
-            if(value.equals(elementData[i])) {
+            if (value.equals(elementData[i])) {
                 oldValue = elementData[i];
                 this.remove(i);
                 return oldValue;

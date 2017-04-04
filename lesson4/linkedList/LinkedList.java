@@ -61,6 +61,20 @@ public class LinkedList implements List, Stack {
         }
     }
 
+    //поиск элемента по значению
+    public Object get(Object o) {
+        if (head == null) return null;
+
+        if (head.value.equals(o)) return head;
+
+        Item it = head;
+        while(it.next != null) {
+            if (it.next.value.equals(o)) return it.next;
+            it = it.next;
+        }
+        return null;
+    }
+
     //удаление по индексу
     @Override
     public Object remove(int i) {

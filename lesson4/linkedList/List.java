@@ -8,6 +8,8 @@ public interface List extends Iterable {
 
     Object get(int index);
 
+    Object get(Object o);
+
     Object remove(int index);
 
     Object remove(Object value);
