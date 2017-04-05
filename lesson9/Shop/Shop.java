@@ -4,6 +4,8 @@ import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.List;
 import lesson6.ArrayList.ArrayList;
 
+import java.util.Scanner;
+
 /**
  * Created by l1s on 02.04.17.
  */
@@ -13,8 +15,8 @@ public class Shop {
     private List stock;
     private List cart;
     private List transaction;
-    private int cartPrice = 0;
-    private int balance = 0;
+    private int cartPrice;
+    private int balance;
 
     public Shop() {
         this.stock = new LinkedList();
@@ -22,13 +24,87 @@ public class Shop {
         this.transaction = new ArrayList();
     }
 
+    //юзерфрендли интерфейс =)
+    public void letsShopping() {
+        //логинимся
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Введите имя: ");
+        String s = sc.nextLine();
+        User user = new Shop.User(s);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("\nСписок команд:\n" +
+                "show       посмотреть доступные товары\n" +
+                "add        добавить в корзину\n" +
+                "cart       просмотр корзины\n" +
+                "rm         удалить товар из корзины\n" +
+                "buy        совершить покупку\n" +
+                "exit       выход\n");
+        System.out.println(builder);
+
+        //смотрим магазин
+        System.out.println("Наши товары:");
+        show();
+        System.out.println("*********************************************************");
+
+        //собственно сам консольный интерфейс...
+        while (true) {
+            String c = sc.nextLine();
+
+            switch (c) {
+                case "show":
+                    show();
+                    break;
+
+                case "add":
+                    System.out.println("введите id товара: ");
+                    int id = sc.nextInt();
+                    putToCart(id);
+                    break;
+
+                case "cart":
+                    showCart();
+                    break;
+
+                case "buy":
+                    if (getCart().size() == 0) {
+                        System.out.println("Ваша корзина пуста!");
+                    } else {
+                        System.out.println("введите сумму: ");
+                        int sum = sc.nextInt();
+                        buy(user.getId(), sum);
+                    }
+                    break;
+
+                case "rm":
+                    if (getCart().size() == 0) {
+                        System.out.println("Ваша корзина пуста!");
+                    } else {
+                        System.out.println("введите id товара: ");
+                        int prId = sc.nextInt();
+                        removeFromCart(prId);
+                    }
+                    break;
+
+                case "trans":
+                    for (Object o : transaction)
+                        System.out.println(o);
+                    break;
+
+                case "exit":
+                    return;
+            }
+        }
+    }
+
     //добавить товар в магазин
-    public void add(Product p) {
+    public void putToShop(String name, int price) {
+        Product p = new Product(name, price);
         stock.add(p);
     }
 
     //добавить товар в корзину
-    public void put(int id) {
+    public void putToCart(int id) {
         for (Object o : stock) {
             if (((Product) o).getId() == id) {
                 cart.add(o);
@@ -42,7 +118,7 @@ public class Shop {
     }
 
     //удалить из корзины
-    public void remove(int id) {
+    public void removeFromCart(int id) {
         for (Object o : cart) {
             if (((Product)o).getId() == id) {
                 cart.remove(o);
@@ -83,6 +159,11 @@ public class Shop {
 
     //просмотр магазина
     public void show() {
+        if (stock.size() == 0) {
+            System.out.println("Магазин пуст, ждём привоза.");
+
+            return;
+        }
         for (Object o : stock)
             System.out.println(o);
     }
@@ -95,7 +176,7 @@ public class Shop {
         public User(String name) {
             this.name = name;
             this.id = Math.abs(name.hashCode());
-            System.out.println("Ваш id: " + id);
+            System.out.println("Привет " + name + "! Твой id: " + id);
         }
 
         public int getId() {

@@ -44,6 +44,6 @@ public class Product {
     public String toString() {
         return  "арт." + id +
                 "   " + name +
-                "   цена=" + price;
+                "   цена=" + price + "$";
     }
 }

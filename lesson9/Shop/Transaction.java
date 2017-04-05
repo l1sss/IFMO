@@ -17,4 +17,14 @@ public class Transaction {
         this.total = total;
         this.currentDate = new Date();
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "currentDate=" + currentDate +
+                ", id=" + id +
+                ", userId=" + userId +
+                ", total=" + total +
+                '}';
+    }
 }
