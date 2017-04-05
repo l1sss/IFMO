@@ -5,13 +5,14 @@ package lesson9.Shop;
  */
 public class Product {
     private int id;
+    private static int curId = 1;
     private String name;
     private int price;
 
     public Product(String name, int price) {
         this.name = name;
         this.price = price;
-        this.id = Math.abs(name.hashCode() % 10_000);
+        this.id = curId++;
     }
 
     public int getId() {
