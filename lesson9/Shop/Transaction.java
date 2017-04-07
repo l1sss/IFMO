@@ -7,12 +7,13 @@ import java.util.Date;
  */
 public class Transaction {
     private Date currentDate;
+    private static int trId = 1;
     private int id;
     private int userId;
     private int total;
 
     public Transaction(int userId, int total) {
-        this.id = Math.abs(hashCode());
+        this.id = trId++;
         this.userId = userId;
         this.total = total;
         this.currentDate = new Date();

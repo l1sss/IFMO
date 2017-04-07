@@ -8,9 +8,10 @@ public class Main {
         Shop shop = new Shop(); //создаём магазинчик
 
         //добавляем товары в магазин
-        shop.putToShop("Axe", 29);
-        shop.putToShop("cat Barsik", 0);
-        shop.putToShop("RPG", 1200);
+        shop.putToShop("cat Barsik", 0, 1);
+        shop.putToShop("Axe", 29, 10);
+        shop.putToShop("RPG", 1200, 2);
+        shop.putToShop("Axe", 29, 11);
 
         //шопимся
         shop.letsShopping();

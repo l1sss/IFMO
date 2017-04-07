@@ -1,12 +1,15 @@
+/*
 package lesson7.LazyAccumulator;
 
 
 import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.Stack;
 
+*/
 /**
  * Created by l1s on 29.03.17.
- */
+ *//*
+
 public class LazyStackAccumulator {
     private Stack stack;
     private Stack rStack;
@@ -21,7 +24,7 @@ public class LazyStackAccumulator {
     }
 
     public double calculate() {
-        rStack = new LinkedList();
+        rStack = new LinkedList<>();
         for (Object o : stack) {
             rStack.push(o);
         }
@@ -33,7 +36,7 @@ public class LazyStackAccumulator {
         return value;
     }
 
-    private class Item {
+    private class Item<K, V> {
         double value;
         Operation operation;
 
@@ -43,3 +46,4 @@ public class LazyStackAccumulator {
         }
     }
 }
+*/

@@ -3,16 +3,16 @@ package lesson4.linkedList;
 /**
  * Created by l1s on 29.03.17.
  */
-public interface List extends Iterable {
-    void add(Object o);
+public interface List<T> extends Iterable<T> {
+    void add(T val);
 
-    Object get(int index);
+    T get(int index);
 
-    Object get(Object o);
+    T get(T o);
 
-    Object remove(int index);
+    T remove(int index);
 
-    Object remove(Object value);
+    T remove(T val);
 
     int size();
 }

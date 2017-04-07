@@ -1,12 +1,15 @@
+/*
 package lesson7.LazyAccumulator;
 
 import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.List;
 import lesson4.linkedList.Stack;
 
+*/
 /**
  * Created by l1s on 29.03.17.
- */
+ *//*
+
 public class Main {
     public static void main(String[] args) {
 
@@ -46,3 +49,4 @@ public class Main {
         System.out.println(lsAcc.calculate());
     }
 }
+*/

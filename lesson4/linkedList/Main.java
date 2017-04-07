@@ -1,11 +1,13 @@
 package lesson4.linkedList;
 
+import java.util.Iterator;
+
 /**
  * Created by l1s on 22.03.17.
  */
 public class Main {
     public static void main(String[] args) {
-        LinkedList list1 = new LinkedList();
+        LinkedList<String> list1 = new LinkedList<>();
         list1.add("Кирилл");
         list1.add("любит");
         list1.add("есть");
@@ -15,7 +17,7 @@ public class Main {
 
         System.out.println();
 
-        LinkedList list2 = new LinkedList();
+        LinkedList<String> list2 = new LinkedList<>();
         list2.add("Кирилл");
         list2.add("любит");
         list2.add("в");
@@ -26,5 +28,11 @@ public class Main {
         System.out.println();
 
         System.out.println(list1.hashCode() == (list2.hashCode()));
+
+        Iterator<String> iterator = list1.iterator();
+
+        while(iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }

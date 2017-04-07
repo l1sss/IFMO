@@ -2,7 +2,6 @@ package lesson9.Shop;
 
 import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.List;
-import lesson6.ArrayList.ArrayList;
 
 import java.util.Scanner;
 
@@ -12,23 +11,127 @@ import java.util.Scanner;
 
 /////////////////////////////////////////////////// SHOP ///////////////////////////////////////////////////////////////
 public class Shop {
-    private List stock;
-    private List cart;
-    private List transaction;
+    private List<Product> stock;
+    private List<CartProduct> cart;
+    private List<Transaction> transaction;
     private int cartPrice;
     private int balance;
 
     public Shop() {
-        this.stock = new LinkedList();
-        this.cart = new ArrayList();
-        this.transaction = new ArrayList();
+        this.stock = new LinkedList<>();
+        this.cart = new LinkedList<>();
+        this.transaction = new LinkedList<>();
+    }
+
+    public List getCart() {
+        return cart;
+    }
+
+    //добавить товар в магазин
+    public void putToShop(String name, int price, int quantity) {
+        Product p = new Product(name, price, quantity);
+        if (stock.get(p) != null) {
+            (stock.get(p)).setQuantity((stock.get(p).getQuantity() + quantity));
+        }else
+            stock.add(p);
+    }
+
+    //добавить товар в корзину
+    public void putToCart(int id, int quantity) {
+        if (id < 0 || id > stock.size()) {
+            System.out.println("Некорректный id!");
+
+            return;
+        }
+        if (quantity < 1 || stock.get(id).getQuantity() < quantity) {
+            System.out.println("Некорректный запрос кол-ва");
+
+            return;
+        }
+        Product p = stock.get(id);
+
+        if (getFromCart(id) != null) {
+            if ((p.getQuantity() + quantity) > stock.get(p).getQuantity()) {
+                System.out.println("Недоступное количество!");
+
+                return;
+            }
+            p.setQuantity(p.getQuantity() + quantity);
+            cartPrice += p.getPrice() * quantity;
+
+            return;
+        }
+        cart.add(new CartProduct(id, p.getName(), p.getPrice(), quantity));
+        cartPrice += getFromCart(id).getPrice() * quantity;
+        System.out.println("Товар добавлен в корзину");
+    }
+
+    //взять товар из корзины по id
+    public CartProduct getFromCart(int id) {
+        for (CartProduct cp : cart) {
+            if (cp.getId() == id) return cp;
+        }
+        return null;
+    }
+
+    /*//удалить из корзины
+    public void removeFromCart(int id) {
+        for (Product tmp : cart) {
+            Product p = (Product) o;
+            if (p.getId() == id) {
+                cart.remove(o);
+                cartPrice -= p.getPrice();
+                stock.add(o);
+                System.out.println("Товар удалён из корзины");
+                return;
+            }
+        }
+        System.out.println("Товара с таким id нет в корзине");
+    }*/
+
+    //просмотр корзины
+    public void showCart() {
+        System.out.println("============ Корзина ==============");
+        for (CartProduct p : cart) {
+            System.out.println(p);
+        }
+        System.out.println("===================================");
+        System.out.println("Стоимость корзины: " + cartPrice);
+    }
+
+    //покупка
+    public void buy(int usrId, int price) {
+        if (price < cartPrice) {
+            System.out.println("Недостаточно средств");
+
+            return;
+        }
+        for (CartProduct cp : cart) {
+            stock.get(cp.getId()).setQuantity(stock.get(cp.getId()).getQuantity() - cp.getQuantity());
+        }
+        transaction.add(new Transaction(usrId, cartPrice));
+        balance += cartPrice;
+        cartPrice = 0;
+        cart = new LinkedList<>();
+        System.out.println("Спасибо за покупку!");
+    }
+
+    //просмотр магазина
+    public void show() {
+        if (stock.size() == 0) {
+            System.out.println("Магазин пуст, ждём привоза.");
+
+            return;
+        }
+        for (Product p : stock)
+            System.out.println(p);
     }
 
     //юзерфрендли интерфейс =)
     public void letsShopping() {
         //логинимся
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите имя: ");
+        System.out.print("Введите имя: ");
         String s = sc.nextLine();
         User user = new Shop.User(s);
 
@@ -59,7 +162,9 @@ public class Shop {
                 case "add":
                     System.out.println("введите id товара: ");
                     int id = sc.nextInt();
-                    putToCart(id);
+                    System.out.println("введите кол-во: ");
+                    int qty = sc.nextInt();
+                    putToCart(id, qty);
                     break;
 
                 case "cart":
@@ -82,7 +187,7 @@ public class Shop {
                     } else {
                         System.out.println("введите id товара: ");
                         int prId = sc.nextInt();
-                        removeFromCart(prId);
+                        //removeFromCart(prId);
                     }
                     break;
 
@@ -96,86 +201,15 @@ public class Shop {
             }
         }
     }
-
-    //добавить товар в магазин
-    public void putToShop(String name, int price) {
-        Product p = new Product(name, price);
-        stock.add(p);
-    }
-
-    //добавить товар в корзину
-    public void putToCart(int id) {
-        for (Object o : stock) {
-            if (((Product) o).getId() == id) {
-                cart.add(o);
-                cartPrice += ((Product) o).getPrice();
-                stock.remove(o);
-                System.out.println("Товар добавлен в корзину");
-                return;
-            }
-        }
-        System.out.println("Товара нет в наличии");
-    }
-
-    //удалить из корзины
-    public void removeFromCart(int id) {
-        for (Object o : cart) {
-            if (((Product)o).getId() == id) {
-                cart.remove(o);
-                cartPrice -= ((Product)o).getPrice();
-                stock.add(o);
-                System.out.println("Товар удалён из корзины");
-                return;
-            }
-        }
-        System.out.println("Товара с таким id нет в корзине");
-    }
-
-    //просмотр корзины
-    public void showCart() {
-        System.out.println("============ Корзина ==============");
-        for (Object o : cart) {
-            System.out.println(o);
-        }
-        System.out.println("===================================");
-        System.out.println("Стоимость корзины: " + cartPrice);
-    }
-
-    //покупка
-    public void buy(int usrId, int price) {
-        if (price < cartPrice) System.out.println("Недостаточно средств");
-        else {
-            transaction.add(new Transaction(usrId, cartPrice));
-            balance += cartPrice;
-            cartPrice = 0;
-            cart = new ArrayList();
-            System.out.println("Спасибо за покупку!");
-        }
-    }
-
-    public List getCart() {
-        return cart;
-    }
-
-    //просмотр магазина
-    public void show() {
-        if (stock.size() == 0) {
-            System.out.println("Магазин пуст, ждём привоза.");
-
-            return;
-        }
-        for (Object o : stock)
-            System.out.println(o);
-    }
-
 //================================================== USER ==============================================================
     public static class User {
         private int id;
+        private static int usrID = 1;
         private String name;
 
         public User(String name) {
             this.name = name;
-            this.id = Math.abs(name.hashCode());
+            this.id = usrID++;
             System.out.println("Привет " + name + "! Твой id: " + id);
         }
 

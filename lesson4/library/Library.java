@@ -6,7 +6,7 @@ package lesson4.library;
 
 //БИБЛИОТЕКА
 public class Library {
-     private LinkedList[] books;
+     private LinkedList<Book, Integer>[] books;
 
     public Library(int capacity) {
         this.books = new LinkedList[capacity];
@@ -21,7 +21,7 @@ public class Library {
         }
         int i = Math.abs(book.hashCode() % books.length);
         if (books[i] == null) {
-            books[i] = new LinkedList();
+            books[i] = new LinkedList<>();
             books[i].push(book, quantity);
         } else {
             if(books[i].find(book) != null)
@@ -69,26 +69,26 @@ public class Library {
     }
 
 //СВЯЗНЫЙ СПИСОК
-    private static class LinkedList {
-        Item head;//указатель на первый элемент
-        Item tail;//указатель на последний элемент
+    private class LinkedList<K, V> {
+        Item<K, V> head;//указатель на первый элемент
+        Item<K, V> tail;//указатель на последний элемент
         int size;
 
         //вставка элемента в начало
-        public void push(Book book, int quantity) {
-            Item next = head;
-            head = new Item(book, quantity);
+        public void push(K book, V quantity) {
+            Item<K, V> next = head;
+            head = new Item<>(book, quantity);
             head.next = next;
             size++;
         }
 
         //поиск элемента по значению
-        public Item find(Book book) {
+        public Item<K, V> find(K book) {
             if (head == null) return null;
 
             if (head.value.equals(book)) return head;
 
-            Item it = head;
+            Item<K, V> it = head;
             while(it.next != null) {
                 if (it.next.value.equals(book)) return it.next;
                 it = it.next;
@@ -97,7 +97,7 @@ public class Library {
         }
 
         //удаление элемента по значению
-        void remove(Book book) {
+        void remove(K book) {
             if (head == null) return; //список пуст, расходимся
 
             if (head == tail) { //в списке только один элемент
@@ -114,7 +114,7 @@ public class Library {
             }
 
         //во всех остальных случаях
-            Item it = head;
+            Item<K, V> it = head;
             while (it.next != null) { //итерируемся, пока следующий элемент существует
                 if (it.next.value.equals(book)) { //проверяем следующий элемент
                     if (tail == it.next) { //если он последний
@@ -129,7 +129,7 @@ public class Library {
         }
 
         public void print() {
-            Item it = head;
+            Item<K, V> it = head;
 
             while(it != null) {
                 System.out.println(it + "   " + it.count);
@@ -138,12 +138,12 @@ public class Library {
         }
 
 //УЗЛЫ СВЯЗНОГО СПИСКА
-        private static class Item {
-            Item next; //указатель на следующий элемент
-            Book value;//значение
-            int count;//счётчик
+        private class Item<K1, V1> {
+            Item<K1, V1> next; //указатель на следующий элемент
+            K1 value;//значение
+            V1 count;//счётчик
 
-            Item(Book value, int count) {
+            Item(K1 value, V1 count) {
                 this.value = value;
                 this.count = count;
             }

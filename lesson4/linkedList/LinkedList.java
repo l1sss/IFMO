@@ -7,14 +7,14 @@ import java.util.Iterator;
  */
 
 //СВЯЗНЫЙ СПИСОК
-public class LinkedList implements List, Stack {
-    private Item head;//указатель на первый элемент
-    private Item tail;//указатель на последний элемент
+public class LinkedList<T> implements List<T>, Stack<T> {
+    private Item<T> head;//указатель на первый элемент
+    private Item<T> tail;//указатель на последний элемент
     private int size;
 
     //добавление элемента в конец
-    public void add(Object o) {
-        Item it = new Item(o);
+    public void add(T val) {
+        Item<T> it = new Item<>(val);
 
         if (head == null) {
             head = it;
@@ -28,10 +28,10 @@ public class LinkedList implements List, Stack {
 
     //добавление элемента в начало
     @Override
-    public void push(Object o) {
-        Item next = head;
+    public void push(T val) {
+        Item<T> next = head;
 
-        head = new Item(o);
+        head = new Item<>(val);
         head.next = next;
 
         size++;
@@ -39,7 +39,7 @@ public class LinkedList implements List, Stack {
 
     //взятие элемента по индексу
     @Override
-    public Object get(int i) {
+    public T get(int i) {
         if (head == null)
             return null;
 
@@ -48,8 +48,8 @@ public class LinkedList implements List, Stack {
 
         int cnt = 1;
 
-        for (Item prev = head; ; ) {
-            Item next = prev.next;
+        for (Item<T> prev = head; ; ) {
+            Item<T> next = prev.next;
 
             if (next == null)
                 return null;
@@ -62,14 +62,14 @@ public class LinkedList implements List, Stack {
     }
 
     //поиск элемента по значению
-    public Object get(Object o) {
+    public T get(T val) {
         if (head == null) return null;
 
-        if (head.value.equals(o)) return head;
+        if (head.value.equals(val)) return head.value;
 
-        Item it = head;
+        Item<T> it = head;
         while(it.next != null) {
-            if (it.next.value.equals(o)) return it.next;
+            if (it.next.value.equals(val)) return it.next.value;
             it = it.next;
         }
         return null;
@@ -77,12 +77,12 @@ public class LinkedList implements List, Stack {
 
     //удаление по индексу
     @Override
-    public Object remove(int i) {
+    public T remove(int i) {
         if (head == null)
             return null;
 
         if (i == 0) {
-            Item h = head;
+            Item<T> h = head;
             head = head.next;
             size--;
 
@@ -91,8 +91,8 @@ public class LinkedList implements List, Stack {
 
         int cnt = 1;
 
-        for (Item prev = head; ; ) {
-            Item next = prev.next;
+        for (Item<T> prev = head; ; ) {
+            Item<T> next = prev.next;
 
             if (next == null)
 
@@ -112,11 +112,12 @@ public class LinkedList implements List, Stack {
     }
 
     //удаление элемента по значению
-    public Object remove(Object value) {
+    @Override
+    public T remove(T value) {
         if (head == null) return null; //список пуст, расходимся
 
         if (head == tail) {//в списке только один элемент
-            Item h = head;
+            Item<T> h = head;
             head = null;
             tail = null;
             size--;
@@ -125,7 +126,7 @@ public class LinkedList implements List, Stack {
         }
 
         if (head.value.equals(value)) { //если первый элемент - наш, то перекидываем ссылку на следующий за головой элемент
-            Item h = head;
+            Item<T> h = head;
             head = head.next;
             size--;
 
@@ -133,10 +134,10 @@ public class LinkedList implements List, Stack {
         }
 
         //во всех остальных случаях
-        Item it = head;
+        Item<T> it = head;
         while (it.next != null) { //итерируемся, пока следующий элемент существует
             if (it.next.value.equals(value)) {//проверяем следующий элемент
-                Item h = it.next;
+                Item<T> h = it.next;
                 if (tail == it.next) { //если он последний
                     tail = it; //перекидываем указатель хвоста на текущий элемент
                 }
@@ -150,12 +151,12 @@ public class LinkedList implements List, Stack {
     }
 
     @Override
-    public Object poll() {
+    public T poll() {
         return remove(0);
     }
 
     public void print() {
-        Item it = head;
+        Item<T> it = head;
 
         while (it != null) {
             System.out.println(it);
@@ -168,7 +169,7 @@ public class LinkedList implements List, Stack {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LinkedList that = (LinkedList) o;
+        LinkedList<?> that = (LinkedList<?>) o;
 
         if (size != that.size) return false;
         if (head != null ? !head.equals(that.head) : that.head != null) return false;
@@ -188,20 +189,20 @@ public class LinkedList implements List, Stack {
     }
 
 //УЗЕЛ СВЯЗНОГО СПИСКА
-    private static class Item {
-        Item next; //указатель на следующий элемент
-        Object value;
+    private static class Item<T> {
+        Item<T> next; //указатель на следующий элемент
+        T value; //значение
 
-        public Item(Object value) {
-            this.value = value;
-        }
+    public Item(T value) {
+        this.value = value;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Item item = (Item) o;
+        Item<?> item = (Item<?>) o;
 
         if (next != null ? !next.equals(item.next) : item.next != null) return false;
         return value != null ? value.equals(item.value) : item.value == null;
@@ -222,14 +223,14 @@ public class LinkedList implements List, Stack {
 
 //ИТЕРАТОР
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return new LlIterator(head);
     }
 
-    public class LlIterator implements Iterator {
-        Item next;
+    public class LlIterator implements Iterator<T> {
+        Item<T> next;
 
-        LlIterator(Item next) {
+        LlIterator(Item<T> next) {
             this.next = next;
         }
 
@@ -239,8 +240,8 @@ public class LinkedList implements List, Stack {
         }
 
         @Override
-        public Object next() {
-            Item next = this.next;
+        public T next() {
+            Item<T> next = this.next;
             this.next = next.next;
             return next.value;
         }

@@ -8,7 +8,7 @@ import java.util.Iterator;
  */
 public class Main {
     public static void main(String[] args) {
-        List list = new ArrayList();
+        /*List list = new ArrayList();
         String s = "test";
         for (int i = 0; i < 12; i++) {
             list.add(s + i);
@@ -28,6 +28,20 @@ public class Main {
         while (iterator.hasNext()) {
             Object val = iterator.next();
             System.out.println(val);
+        }*/
+
+        List<String> list = new ArrayList<>();
+        list.add("Всё");
+        list.add("работает");
+
+        for (String s : list) {
+            System.out.println(s);
+        }
+
+        Iterator<String> iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
         }
     }
 }

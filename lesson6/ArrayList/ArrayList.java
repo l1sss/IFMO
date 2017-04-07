@@ -8,18 +8,18 @@ import java.util.Iterator;
  */
 
 //ДИНАМИЧЕСКИЙ МАССИВ
-public class ArrayList implements List {
+public class ArrayList<T> implements List<T> {
     private Object[] elementData;
-    private int capacity = 10; //вместимость по умолчанию
+    private static final int DEFAULT_CAPACITY = 10; //вместимость по умолчанию
     private int size;
 
     public ArrayList() {
-        this.elementData = new Object[capacity];
+        this.elementData = new Object[DEFAULT_CAPACITY];
     }
 
     @Override
-    public void add(Object o) {
-        if (size + 1 <= capacity) {
+    public void add(T o) {
+        if (size + 1 <= DEFAULT_CAPACITY) {
             elementData[size++] = o;
 
             return;
@@ -30,43 +30,48 @@ public class ArrayList implements List {
         elementData[size++] = o;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object get(int index) {
-        return elementData[index];
+    public T get(int index) {
+        return (T) elementData[index];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object get(Object value) {
+    public T get(Object value) {
         for (Object tmp : elementData) {
-            if (value.equals(tmp)) return value;
+            if (value.equals(tmp)) return (T) value;
         }
         return null;
     }
 
+
+    @SuppressWarnings("unchecked")
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         Object oldValue = elementData[index];
         int numMoved = size - index - 1;
         System.arraycopy(elementData, index + 1, elementData, index, numMoved);
         elementData[--size] = null;
-        return oldValue;
+        return (T) oldValue;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object remove(Object value) {
+    public T remove(T value) {
         Object oldValue;
         for (int i = 0; i < elementData.length; i++) {
             if (value.equals(elementData[i])) {
                 oldValue = elementData[i];
                 this.remove(i);
-                return oldValue;
+                return (T) oldValue;
             }
         }
         return null;
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return new ALIterator(elementData);
     }
 
@@ -75,7 +80,7 @@ public class ArrayList implements List {
     }
 
 //ИТЕРАТОР
-    private class ALIterator implements Iterator {
+    private class ALIterator implements Iterator<T> {
         private Object[] array;
         private int index = 0;
 
@@ -88,9 +93,10 @@ public class ArrayList implements List {
             return index < array.length && array[index] != null;
         }
 
+        @SuppressWarnings("unchecked")
         @Override
-        public Object next() {
-            return array[index++];
+        public T next() {
+            return (T) array[index++];
         }
     }
 }
