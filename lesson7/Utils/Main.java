@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("*************************************FIND****************************************");
 
-        ArrayList list = new ArrayList();
+        ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(5);
         list.add(10);
@@ -29,7 +29,7 @@ public class Main {
 
         System.out.println("*************************************FILTER****************************************");
 
-        ArrayList list2 = new ArrayList();
+        ArrayList<String> list2 = new ArrayList<>();
         list2.add("Aa");
         list2.add("a");
         list2.add("d3");
@@ -43,7 +43,7 @@ public class Main {
 
         System.out.println("*************************************TRANSFORMER****************************************");
 
-        ArrayList list3 = new ArrayList();
+        ArrayList<Integer> list3 = new ArrayList<>();
         list3.add(1);
         list3.add(1234);
         list3.add(3);
@@ -62,7 +62,7 @@ public class Main {
 
         System.out.println("*************************************INTERSECT****************************************");
 
-        List listA = new LinkedList();
+        List<Object> listA = new LinkedList<>();
         listA.add("a");
         listA.add("b");
         listA.add("c");
@@ -71,7 +71,7 @@ public class Main {
         listA.add(3);
         listA.add(4);
 
-        List listB = new LinkedList();
+        List<Object> listB = new LinkedList();
         listB.add("D");
         listB.add("B");
         listB.add("E");

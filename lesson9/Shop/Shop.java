@@ -2,6 +2,7 @@ package lesson9.Shop;
 
 import lesson4.linkedList.LinkedList;
 import lesson4.linkedList.List;
+import lesson6.ArrayList.ArrayList;
 
 import java.util.Scanner;
 
@@ -18,9 +19,9 @@ public class Shop {
     private int balance;
 
     public Shop() {
-        this.stock = new LinkedList<>();
-        this.cart = new LinkedList<>();
-        this.transaction = new LinkedList<>();
+        this.stock = new ArrayList<>();
+        this.cart = new ArrayList<>();
+        this.transaction = new ArrayList<>();
     }
 
     public List getCart() {

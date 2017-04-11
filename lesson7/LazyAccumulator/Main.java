@@ -1,21 +1,13 @@
-/*
 package lesson7.LazyAccumulator;
 
-import lesson4.linkedList.LinkedList;
-import lesson4.linkedList.List;
-import lesson4.linkedList.Stack;
-
-*/
-/**
- * Created by l1s on 29.03.17.
- *//*
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
         List list = new LinkedList();
         LazyListAccumulator llAcc = new LazyListAccumulator(list);
-        Stack stack = new LinkedList();
+        Stack<Number> stack = new Stack<>();
         LazyStackAccumulator lsAcc = new LazyStackAccumulator(stack);
 
         llAcc.add(0, new Operation() {
@@ -49,4 +41,3 @@ public class Main {
         System.out.println(lsAcc.calculate());
     }
 }
-*/

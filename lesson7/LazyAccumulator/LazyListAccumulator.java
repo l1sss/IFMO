@@ -1,15 +1,15 @@
 package lesson7.LazyAccumulator;
 
-import lesson4.linkedList.List;
+import java.util.List;
 
 /**
  * Created by l1s on 29.03.17.
  */
 public class LazyListAccumulator {
-    private List list;
+    private List<Item> list;
     private double value;
 
-    public LazyListAccumulator(List list) {
+    public LazyListAccumulator(List<Item> list) {
         this.list = list;
     }
 
@@ -18,8 +18,8 @@ public class LazyListAccumulator {
     }
 
     public double calculate() {
-        for (Object o : list) {
-            value = ((Item)o).operation.apply(value, ((Item)o).value);
+        for (Item it : list) {
+            value = it.operation.apply(value, (it.value));
         }
         return value;
     }

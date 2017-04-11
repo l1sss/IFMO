@@ -1,18 +1,11 @@
-/*
 package lesson7.LazyAccumulator;
 
+import java.util.Stack;
 
-import lesson4.linkedList.LinkedList;
-import lesson4.linkedList.Stack;
-
-*/
-/**
- * Created by l1s on 29.03.17.
- *//*
 
 public class LazyStackAccumulator {
-    private Stack stack;
-    private Stack rStack;
+    private Stack<Item> stack;
+    private Stack<Item> rStack;
     private double value;
 
     public LazyStackAccumulator(Stack stack) {
@@ -24,13 +17,13 @@ public class LazyStackAccumulator {
     }
 
     public double calculate() {
-        rStack = new LinkedList<>();
-        for (Object o : stack) {
-            rStack.push(o);
+        rStack = new Stack<>();
+        for (Item it : stack) {
+            rStack.push(it);
         }
 
-        for (Object o : rStack) {
-            value = ((Item)o).operation.apply(value, ((Item)o).value);
+        for (Item it : rStack) {
+            value = it.operation.apply(value, it.value);
         }
 
         return value;
@@ -40,10 +33,9 @@ public class LazyStackAccumulator {
         double value;
         Operation operation;
 
-        public Item(double value, Operation operation) {
+         Item(double value, Operation operation) {
             this.value = value;
             this.operation = operation;
         }
     }
 }
-*/
