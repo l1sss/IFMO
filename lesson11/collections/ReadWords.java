@@ -37,8 +37,11 @@ public class ReadWords {
         //считаем кол-во слов в книге
         System.out.println("ВСЕГО СЛОВ В КНИГЕ: " + words.size());
 
+        topLetters(words);
+    }
 
-        //топ n слов, которые встречаются чаще всего
+    //топ n слов, которые встречаются чаще всего
+    public static void topWords(List<String> words) {
         Map<String, Integer> topWords = new TreeMap<>();
 
         for (String word : words) {
@@ -57,8 +60,10 @@ public class ReadWords {
         for (int i = 0; i < 10; i++) {
             System.out.println(topValues.get(i));
         }
+    }
 
-        //группируем слова по их длине
+    //группируем слова по их длине
+    public static void groupWords(List<String> words) {
         Map<Integer, Set<String>> wordsLength = new TreeMap<>();
         for (String s : words) {
             Set<String> set = wordsLength.get(s.length());
@@ -72,16 +77,18 @@ public class ReadWords {
         }
 
         List<Map.Entry<Integer, Set<String>>> topLength = new ArrayList<>(wordsLength.entrySet());
-        topLength.sort((o1, o2) -> - Integer.compare(o1.getKey(), o2.getKey()));
+        topLength.sort((o1, o2) -> -Integer.compare(o1.getKey(), o2.getKey()));
 
-        System.out.println("\n ГРУППИРОВКА СЛОВ ПО ДЛИНЕ БУКВ: ");
+        System.out.println("\n ГРУППИРОВКА СЛОВ ПО ДЛИНЕ БУКВ:");
         for (int i = 0; i < topLength.size(); i++) {
             System.out.println(topLength.get(i));
         }
+    }
 
-        //топ букв в %
+    //топ букв в %
+    public static void topLetters(List<String> words) {
         char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-                                'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+                'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
         Map<Character, Double> letters = new TreeMap<>();
         for (Character ch : alphabet) {
@@ -110,17 +117,19 @@ public class ReadWords {
         }
 
         List<Map.Entry<Character, Double>> topLetters = new ArrayList<>(letters.entrySet());
-        topLetters.sort((o1, o2) -> - Double.compare(o1.getValue(), o2.getValue()));
+        topLetters.sort((o1, o2) -> -Double.compare(o1.getValue(), o2.getValue()));
 
-        System.out.println("\n ТОП БУКВ:\n");
+        System.out.println("\n ТОП БУКВ В %:");
 
         for (Map.Entry<Character, Double> pair : topLetters) {
             char letter = pair.getKey();
             double count = pair.getValue();
-            System.out.println(letter + "= " + Math.rint(count) + "%");
+            System.out.printf("%s= %.2f\n", letter, count);
         }
+    }
 
-        //топ фраз в книге
+    //топ фраз в книге
+    public static void topPhrases(List<String> words) {
         ArrayList<String> tmp = new ArrayList<>(words);
         Map<String, Integer> phrases = new TreeMap<>();
 
@@ -136,7 +145,7 @@ public class ReadWords {
         List<Map.Entry<String, Integer>> topPhrases = new ArrayList<>(phrases.entrySet());
         topPhrases.sort((o1, o2) -> - Integer.compare(o1.getValue(), o2.getValue()));
 
-        System.out.println("\n ТОП 10 ФРАЗ:\n");
+        System.out.println("\n ТОП 10 ФРАЗ:");
         for (int i = 0; i < 10; i++) {
             System.out.println(topPhrases.get(i));
         }
