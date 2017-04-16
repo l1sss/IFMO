@@ -11,6 +11,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
     private Item<T> head;//указатель на первый элемент
     private Item<T> tail;//указатель на последний элемент
     private int size;
+    private int modCount;
 
     //добавление элемента в конец
     public void add(T val) {
@@ -24,6 +25,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
             tail = it;
         }
         size++;
+        modCount++;
     }
 
     //добавление элемента в начало
@@ -35,11 +37,13 @@ public class LinkedList<T> implements List<T>, Stack<T> {
         head.next = next;
 
         size++;
+        modCount++;
     }
 
     //взятие элемента по индексу
     @Override
     public T get(int i) {
+        if(i < 0 || i > size) throw new MyException("Incorrect index Exception!");
         if (head == null)
             return null;
 
@@ -85,6 +89,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
             Item<T> h = head;
             head = head.next;
             size--;
+            modCount++;
 
             return h.value;
         }
@@ -104,6 +109,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
                 else
                     prev.next = null;
                 size--;
+                modCount++;
 
                 return next.value;
             }
@@ -121,6 +127,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
             head = null;
             tail = null;
             size--;
+            modCount++;
 
             return h.value;
         }
@@ -129,6 +136,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
             Item<T> h = head;
             head = head.next;
             size--;
+            modCount++;
 
             return h.value;
         }
@@ -143,6 +151,8 @@ public class LinkedList<T> implements List<T>, Stack<T> {
                 }
                 it.next = it.next.next; //перекидываем ссылку через найденный элемент
                 size--;
+                modCount++;
+
                 return h.value;
             }
             it = it.next; //иначе шагаем дальше
@@ -229,6 +239,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
 
     public class LlIterator implements Iterator<T> {
         Item<T> next;
+        int s = modCount;
 
         LlIterator(Item<T> next) {
             this.next = next;
@@ -241,6 +252,7 @@ public class LinkedList<T> implements List<T>, Stack<T> {
 
         @Override
         public T next() {
+            if (s != modCount) throw new MyException("Concurrent Modification Exception");
             Item<T> next = this.next;
             this.next = next.next;
             return next.value;

@@ -14,6 +14,7 @@ public class Main {
         list1.add("в");
         list1.add("Маке");
         list1.print();
+        //list1.get(10);
 
         System.out.println();
 
@@ -32,6 +33,8 @@ public class Main {
         Iterator<String> iterator = list1.iterator();
 
         while(iterator.hasNext()) {
+            list1.add("dadawjlka!!");
+            list1.remove(0);
             System.out.println(iterator.next());
         }
     }

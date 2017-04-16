@@ -8,6 +8,7 @@ public class Crypt2 {
         byte[] btext = stext.getBytes();
         byte[] bkey = skey.getBytes();
 
+        System.out.println(new String(btext));
         crypt(btext, bkey);
         System.out.println(new String(btext));
         crypt(btext, bkey);
