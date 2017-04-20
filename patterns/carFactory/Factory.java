@@ -13,9 +13,9 @@ public abstract class Factory {
             case "Russia":
                 return Russia.getInstance();
             case "Germany":
-                return new Germany();
+                return Germany.getInstance();
             case "Japan":
-                return new Japan();
+                return Japan.getInstance();
         }
         throw new Exception("Invalid region!");
     }

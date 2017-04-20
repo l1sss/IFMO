@@ -6,11 +6,11 @@ package patterns.carFactory;
 public class Main {
     public static void main(String[] args) throws Exception {
         Russia rus = Russia.getInstance();
-        Russia rus2 = Russia.getInstance();
+        Germany ger = Germany.getInstance();
 
         Car car = Factory.getFactory("Russia").createCar();
 
-        System.out.println(rus.createCar().drive(2));
+        System.out.println(ger.createCar().drive(2));
 
         System.out.println(car);
     }

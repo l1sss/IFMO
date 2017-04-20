@@ -8,4 +8,9 @@ public class Lada implements Car {
     public boolean drive(int distance) {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "Hellish chariot";
+    }
 }

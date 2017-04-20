@@ -9,4 +9,9 @@ public class Toyota implements Car {
         if (distance > 250) return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Toyota";
+    }
 }
