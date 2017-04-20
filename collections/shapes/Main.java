@@ -1,4 +1,4 @@
-package collections.Shapes;
+package collections.shapes;
 
 /**
  * Created by l1s on 24.03.17.

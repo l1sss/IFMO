@@ -7,6 +7,7 @@ import java.net.Socket;
 /**
  * Created by l1s on 18.04.17.
  */
+//простой код сервера, который получает сообщение от клиента и возвращает его обратно
 public class Server {
     public static void main(String[] args) {
         int port = 16666;
@@ -23,36 +24,21 @@ public class Server {
             InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
-            /*DataInputStream in = new DataInputStream(sin);
-            DataOutputStream out = new DataOutputStream(sout);*/
-            Object object = null;
+            DataInputStream in = new DataInputStream(sin);
+            DataOutputStream out = new DataOutputStream(sout);
 
-            //String line = null;
+            String line = null;
 
             while (true) {
-                //line = in.readUTF();
-                object = new ObjectInputStream(sin).readObject();
-                if (object instanceof Command) {
-                    Command command = (Command) object;
+                line = in.readUTF();
 
-                    System.out.println("Код команды: " + command.getCode() + "\n");
+                System.out.println("Мы получили это сообщение от клиента: " + line + "\n");
 
-                    command.setCode(2);
+                System.out.println("Отправляем клиенту эту строку обратно...\n");
 
-                    ObjectOutputStream objOut = new ObjectOutputStream(sout);
-
-                    objOut.writeObject(command);
-
-                    System.out.println("Отправляем клиенту в ответ измененный код...");
-                }
-
-                //System.out.println("Мы получили это сообщение от клиента: " + line + "\n");
-
-                //System.out.println("Отправляем клиенту эту строку обратно...\n");
-
-                /*out.writeUTF(line);
+                out.writeUTF(line);
                 out.flush();
-*/
+
                 System.out.println("Ждём следующее сообщение...\n");
             }
         } catch (Exception ex) {

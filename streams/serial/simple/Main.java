@@ -6,8 +6,7 @@ import java.io.*;
  * Created by xmitya on 27.11.16.
  */
 public class Main {
-    public static void main(String[] args) throws IOException,
-            ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         File statFile = new File("stat.bin");
 
         LaunchStat stat;

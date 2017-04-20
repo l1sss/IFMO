@@ -1,4 +1,4 @@
-package collections.Shapes;
+package collections.shapes;
 
 
 /**

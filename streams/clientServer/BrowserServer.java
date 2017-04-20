@@ -7,6 +7,7 @@ import java.net.Socket;
 /**
  * Created by l1s on 19.04.17.
  */
+//сервер в который можно писать через telnet
 public class BrowserServer {
     public static void main(String[] args) throws IOException {
         try (ServerSocket ss = new ServerSocket(54321);
