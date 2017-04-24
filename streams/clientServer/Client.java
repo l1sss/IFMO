@@ -11,7 +11,7 @@ import java.net.Socket;
 public class Client {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         int serverPort = 16666;
-        String address = "10.150.0.188";
+        String address = "192.168.0.101";
 
         try {
             InetAddress ipAddress = InetAddress.getByName(address);

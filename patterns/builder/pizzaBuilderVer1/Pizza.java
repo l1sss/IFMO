@@ -1,4 +1,4 @@
-package patterns.pizzaBuilder;
+package patterns.builder.pizzaBuilderVer1;
 
 import java.util.Collection;
 import java.util.TreeSet;

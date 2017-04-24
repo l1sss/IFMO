@@ -1,12 +1,16 @@
 package streams.clientServer;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
  * Created by l1s on 18.04.17.
  */
+
 //простой код сервера, который получает сообщение от клиента и возвращает его обратно
 public class Server {
     public static void main(String[] args) {
