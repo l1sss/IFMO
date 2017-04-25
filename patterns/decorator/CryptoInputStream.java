@@ -1,38 +1,60 @@
-/*
 package patterns.decorator;
 
-import java.io.*;
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
+/**
+ * Created by xmitya on 05.12.16.
+ */
 public class CryptoInputStream extends FilterInputStream {
-    private InputStream in;
-    private String key;
+    private byte[] key;
 
-    public CryptoInputStream(InputStream in, String key) {
+    private int idx;
+
+    public CryptoInputStream(InputStream in, byte[] key) {
         super(in);
-        this.in = in;
-        this.key = key;
+
+        this.key = key.clone();
+    }
+
+    protected CryptoInputStream(InputStream in, byte[] key, long off) {
+        super(in);
+
+        this.key = key.clone();
+
+        idx = (int) (off % key.length);
     }
 
     @Override
-    public int read(byte[] buffer) throws IOException {
-        int c = in.read();
-        if (c == -1)
+    public int read() throws IOException {
+        int res = super.read();
 
-            return -1;
+        if (res < 0)
+            return res;
 
-        byte[] bkey = key.getBytes();
+        byte b = (byte) res;
 
-        int i = 1;
-        try {
-            for (; i < buffer.length; i++) {
-                c = read();
-                if (c == -1)
+        b ^= key[idx++];
 
-                    break;
+        idx %= key.length;
 
+        return b & 0xFF;
+    }
 
+    @Override
+    public int read(byte[] b, int off, int len) throws IOException {
+        int read = super.read(b, off, len);
+
+        if (read > 0) {
+            for (int i = off; i < read + off; i++) {
+                b[i] ^= key[idx++];
+
+                idx %= key.length;
             }
         }
+
+        return read;
     }
+
 }
-*/

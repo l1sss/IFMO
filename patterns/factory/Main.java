@@ -1,4 +1,4 @@
-package patterns.carFactory;
+package patterns.factory;
 
 /**
  * Created by l1s on 19.04.17.

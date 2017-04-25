@@ -5,28 +5,50 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * Created by l1s on 21.04.17.
+ * Created by xmitya on 05.12.16.
  */
 public class CryptoOutputStream extends FilterOutputStream {
-    private OutputStream out;
-    private String key;
+    private byte[] key;
 
-    public CryptoOutputStream(OutputStream out, String key) {
+    private int idx;
+
+    public CryptoOutputStream(OutputStream out, byte[] key) {
+        this(out, key, 0);
+    }
+
+    public CryptoOutputStream(OutputStream out, byte[] key, long off) {
         super(out);
-        this.out = out;
-        this.key = key;
+
+        this.key = key.clone();
+
+        idx = (int) (off % key.length);
     }
 
     @Override
-    public void write(byte[] b) throws IOException {
-        if (b == null)
-            throw new NullPointerException();
+    public void write(int b) throws IOException {
+        byte b1 = (byte) b;
 
-        byte[] key = this.key.getBytes();
+        b1 ^= key[idx++];
 
-        for (int i = 0; i < b.length; i++)
-            b[i] ^= key[i % key.length];
+        idx %= key.length;
 
-        out.write(b);
+        out.write(b1);
     }
+
+    /*
+    // На самом деле его можно не переопределять, т.к. он делегируется в обычный write(int)
+    @Override
+    public void write(byte[] b, int off, int len) throws IOException {
+        if (len < 0)
+            throw new IllegalArgumentException("len cannot be less that zero: " + len);
+
+        for (int i = off; i < len + off; i++) {
+            b[i] ^= key[idx++];
+
+            idx %= key.length;
+        }
+
+        out.write(b, off, len);
+    }
+    */
 }
