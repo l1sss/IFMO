@@ -1,5 +1,8 @@
 package streams.serial.print;
 
+import patterns.decorator.CryptoInputStream;
+import patterns.decorator.CryptoOutputStream;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -14,6 +17,8 @@ public class PrintClient {
     private String name;
 
     private Scanner scanner;
+
+    private String key = "key = password";
 
     public PrintClient(SocketAddress serverAddr, Scanner scanner) {
         this.serverAddr = serverAddr;
@@ -95,7 +100,7 @@ public class PrintClient {
         try (Socket sock = new Socket()) {
             sock.connect(serverAddr);
 
-            try (OutputStream out = sock.getOutputStream()) {
+            try (OutputStream out = new CryptoOutputStream(sock.getOutputStream(), key.getBytes())) {
                 ObjectOutputStream objOut = new ObjectOutputStream(out);
 
                 objOut.writeObject(msg);
@@ -109,8 +114,8 @@ public class PrintClient {
         try (Socket sock = new Socket()) {
             sock.connect(serverAddr);
 
-            try (OutputStream sout = sock.getOutputStream();
-                 InputStream sin = sock.getInputStream()) {
+            try (OutputStream sout = new CryptoOutputStream(sock.getOutputStream(), key.getBytes());
+                 InputStream sin = new CryptoInputStream(sock.getInputStream(), key.getBytes())) {
 
                 ObjectOutputStream objOut = new ObjectOutputStream(sout);
 

@@ -5,4 +5,6 @@ package reflection.toString;
  */
 public class A {
     private String str;
+    private final int i = 1990;
+    //private B b = new B(); такой вариант сломает myToString
 }

@@ -1,5 +1,8 @@
 package streams.serial.print;
 
+import patterns.decorator.CryptoInputStream;
+import patterns.decorator.CryptoOutputStream;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -49,7 +52,10 @@ public class PrintServer {
     private void process(Socket sock) throws IOException, ClassNotFoundException {
         String host = sock.getInetAddress().getHostAddress();
 
-        try (ObjectInputStream objIn = new ObjectInputStream(sock.getInputStream())) {
+        String key = "key = password";
+
+        try (InputStream in = new CryptoInputStream(sock.getInputStream(), key.getBytes());
+            ObjectInputStream objIn = new ObjectInputStream(in)) {
 
             Object obj = objIn.readObject();
 
@@ -59,7 +65,7 @@ public class PrintServer {
             }
 
             if (obj instanceof Command) {
-                try (OutputStream out = sock.getOutputStream();
+                try (OutputStream out = new CryptoOutputStream(sock.getOutputStream(), key.getBytes());
                      ObjectOutputStream objOut = new ObjectOutputStream(out)) {
                     Command cm = (Command) obj;
 
