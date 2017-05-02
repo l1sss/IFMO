@@ -1,7 +1,7 @@
-package collections.warAndPeace.collections;
+package collections.multiThreadsWarAndPeace.collections;
 
-import collections.warAndPeace.collections.inner.Message;
-import collections.warAndPeace.collections.inner.MessagePriority;
+import collections.multiThreadsWarAndPeace.collections.inner.Message;
+import collections.multiThreadsWarAndPeace.collections.inner.MessagePriority;
 
 import java.util.Scanner;
 

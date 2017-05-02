@@ -10,6 +10,8 @@ import java.util.*;
  */
 public class ReadWords {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
+
         // Создаем файл, указывая путь к текстовому файлу на диске
         File text = new File("/home/l1s/test/wp.txt");
 
@@ -37,7 +39,10 @@ public class ReadWords {
         //считаем кол-во слов в книге
         System.out.println("ВСЕГО СЛОВ В КНИГЕ: " + words.size());
 
-        topLetters(words);
+        topWords(words);
+
+        long finish = System.currentTimeMillis();
+        System.out.println(finish - start);
     }
 
     //топ n слов, которые встречаются чаще всего

@@ -1,4 +1,4 @@
-package collections.warAndPeace.collections.inner;
+package collections.multiThreadsWarAndPeace.collections.inner;
 
 /**
  * Created by xmitya on 17.10.16.

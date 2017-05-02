@@ -5,7 +5,7 @@ package reflection.toString;
  */
 public class Main {
     public static void main(String[] args) {
-        B c = new B();
+        C c = new C();
 
         System.out.println(StringUtils.myToString(c));
     }

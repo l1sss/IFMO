@@ -16,7 +16,7 @@ public class CryptoOutputStream extends FilterOutputStream {
         this(out, key, 0);
     }
 
-    public CryptoOutputStream(OutputStream out, byte[] key, long off) {
+    public CryptoOutputStream(OutputStream out, byte[] key, long off) { //long off?????????????
         super(out);
 
         this.key = key.clone();

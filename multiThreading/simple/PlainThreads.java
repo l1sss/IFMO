@@ -10,7 +10,7 @@ public class PlainThreads {
 
         thread.start();
 
-        Thread.sleep(3000);
+        Thread.sleep(4000);
 
         thread.interrupt();
     }

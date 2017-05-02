@@ -1,12 +1,12 @@
-package collections.warAndPeace.collections;
+package collections.multiThreadsWarAndPeace.collections;
 
-import collections.warAndPeace.collections.inner.Message;
-import collections.warAndPeace.collections.inner.MessageGenerator;
-import collections.warAndPeace.collections.inner.MessagePriority;
+import collections.multiThreadsWarAndPeace.collections.inner.Message;
+import collections.multiThreadsWarAndPeace.collections.inner.MessageGenerator;
+import collections.multiThreadsWarAndPeace.collections.inner.MessagePriority;
 
 import java.util.*;
 
-import static collections.warAndPeace.collections.inner.MessagePriority.LOW;
+import static collections.multiThreadsWarAndPeace.collections.inner.MessagePriority.LOW;
 
 /**
  * Created by xmitya on 17.10.16.

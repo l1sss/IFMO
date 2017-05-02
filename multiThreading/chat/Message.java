@@ -19,7 +19,8 @@ public class Message implements Serializable {
         this.text = text;
     }
 
-    public Message() {
+    public Message()
+    {
         this(0, null, null);
     }
 

@@ -1,4 +1,4 @@
-package collections.warAndPeace;
+package collections.multiThreadsWarAndPeace;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

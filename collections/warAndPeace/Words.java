@@ -1,4 +1,4 @@
-package collections.warAndPeace;
+package collections.multiThreadsWarAndPeace;
 
 import java.io.File;
 import java.io.IOException;

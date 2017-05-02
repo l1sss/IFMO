@@ -1,4 +1,4 @@
-package collections.warAndPeace.collections;
+package collections.multiThreadsWarAndPeace.collections;
 
 import java.util.ArrayList;
 import java.util.List;

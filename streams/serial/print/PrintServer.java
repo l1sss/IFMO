@@ -55,7 +55,7 @@ public class PrintServer {
         String key = "key = password";
 
         try (InputStream in = new CryptoInputStream(sock.getInputStream(), key.getBytes());
-            ObjectInputStream objIn = new ObjectInputStream(in)) {
+             ObjectInputStream objIn = new ObjectInputStream(in)) {
 
             Object obj = objIn.readObject();
 
