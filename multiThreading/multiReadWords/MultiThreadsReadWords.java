@@ -5,20 +5,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
 
-/**
- * Created by xmitya on 07.04.17.
- */
-public class multiThreadsReadWords {
+public class MultiThreadsReadWords {
     // Создаем общую коллекцию для всех потоков
     private Map<String, Integer> resultMap = new TreeMap<>();
 
     public static void main(String[] args) throws IOException, InterruptedException {
         long start = System.currentTimeMillis();
 
-        multiThreadsReadWords mt = new multiThreadsReadWords();
+        MultiThreadsReadWords mt = new MultiThreadsReadWords();
 
         // Создаем файл, указывая путь к текстовому файлу на диске
-        File text = new File("/home/l1s/test/wp.txt");
+        File text = new File("/home/l1s/test/wpp.txt");
 
         // Вычитываем все строки из файла
         List<String> lines = Files.readAllLines(text.toPath());
@@ -45,7 +42,7 @@ public class multiThreadsReadWords {
             for (String s : wordSplit) {
                 // Выбираем только непустые слова.
                 if (s.length() > 0) {
-                    threads.get(it).addWord(s);
+                    threads.get(it).addWord(s.intern());
                     it++;
                     if (it > coreQty - 1) it = 0;
                 }

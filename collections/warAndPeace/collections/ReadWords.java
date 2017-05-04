@@ -13,7 +13,7 @@ public class ReadWords {
         long start = System.currentTimeMillis();
 
         // Создаем файл, указывая путь к текстовому файлу на диске
-        File text = new File("/home/l1s/test/wp.txt");
+        File text = new File("/home/l1s/test/wpp.txt");
 
         // Вычитываем все строки из файла
         List<String> lines = Files.readAllLines(text.toPath());
@@ -32,7 +32,7 @@ public class ReadWords {
             for (String s : wordSplit) {
                 // Выбираем только непустые слова.
                 if (s.length() > 0)
-                    words.add(s.trim());
+                    words.add(s.trim().intern());
             }
         }
 
@@ -42,7 +42,7 @@ public class ReadWords {
         topWords(words);
 
         long finish = System.currentTimeMillis();
-        System.out.println(finish - start);
+        System.out.println("\nВремя выполнения программы: " + (finish - start));
     }
 
     //топ n слов, которые встречаются чаще всего

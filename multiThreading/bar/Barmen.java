@@ -1,7 +1,5 @@
 package multiThreading.bar;
 
-import java.util.Random;
-
 /**
  * Created by l1s on 01.05.17.
  */
@@ -14,7 +12,7 @@ public class Barmen extends Thread implements Runnable {
 
     @Override
     public void run() {
-        int cnt = (int) Math.random() * (2000) + 2000;
+        int cnt = (int) (Math.random() * (2000)) + 2000;
 
         synchronized (order) {
             try {
