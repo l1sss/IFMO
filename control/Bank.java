@@ -1,34 +1,16 @@
 package control;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by l1s on 10.05.17.
  */
 public class Bank {
-    private List<Account> accounts;
     private MailerThread mailer;
     private Thread tMailer;
 
     public Bank() {
-        accounts = new ArrayList<>();
         mailer = new MailerThread();
         tMailer = new Thread(mailer);
         tMailer.start();
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void createAcc(Account acc) {
-        accounts.add(acc);
-    }
-
-    public synchronized boolean checkAcc(Account acc, Account acc2) {
-
-        return accounts.contains(acc) && accounts.contains(acc2) && !acc.equals(acc2);
     }
 
     public void mailerOff() {
@@ -36,12 +18,6 @@ public class Bank {
     }
 
     public void transferMoney(Account acc1, Account acc2, int amout) {
-        if (!checkAcc(acc1, acc2)) {
-            mailer.addToQ(-1);
-
-            return;
-        }
-
         Thread tTrans = new Thread(new TransferThread(acc1, acc2, amout));
         tTrans.start();
     }
