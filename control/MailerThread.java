@@ -33,7 +33,7 @@ public class MailerThread implements Runnable {
                 }
 
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.err.println("Mailer off in process");
             }
         }
     }

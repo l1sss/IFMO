@@ -32,6 +32,8 @@ public class Test {
             resultSum += a.getBalance();
         }
 
+        bank.mailerOff();
+
         Thread.sleep(1000);
         System.out.println("\n" + (char)27 + "[0mSum after operations: " + resultSum);
 
