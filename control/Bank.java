@@ -1,20 +1,24 @@
 package control;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by l1s on 10.05.17.
  */
 public class Bank {
-    private Set<Account> accounts;
+    private List<Account> accounts;
+    private MailerThread mailer;
+    private Thread tMailer;
 
     public Bank() {
-        accounts = new HashSet<>();
+        accounts = new ArrayList<>();
+        mailer = new MailerThread();
+        tMailer = new Thread(mailer);
+        tMailer.start();
     }
 
-    public Set<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
@@ -22,20 +26,73 @@ public class Bank {
         accounts.add(acc);
     }
 
-    public boolean checkAcc(Account acc, Account acc2) {
-        return accounts.contains(acc) && accounts.contains(acc2);
+    public synchronized boolean checkAcc(Account acc, Account acc2) {
+
+        return accounts.contains(acc) && accounts.contains(acc2) && !acc.equals(acc2);
     }
 
-    public boolean transferMoney(Account acc1, Account acc2, int amout) {
-        if (acc1.getBalance() < amout) {
-            System.err.println("insufficient funds");
+    public void mailerOff() {
+        tMailer.interrupt();
+    }
 
-            return false;
+    public void transferMoney(Account acc1, Account acc2, int amout) {
+        if (!checkAcc(acc1, acc2)) {
+            mailer.addToQ(-1);
+
+            return;
         }
 
-        acc1.setBalance(acc1.getBalance() - amout);
-        acc2.setBalance(acc2.getBalance() + amout);
+        Thread tTrans = new Thread(new TransferThread(acc1, acc2, amout));
+        tTrans.start();
+    }
 
-        return true;
+    private class TransferThread implements Runnable {
+        private Account acc1;
+        private Account acc2;
+        private int amout;
+
+        TransferThread(Account acc1, Account acc2, int amout) {
+            this.acc1 = acc1;
+            this.acc2 = acc2;
+            this.amout = amout;
+        }
+
+        @Override
+        public void run() {
+            if (acc1.getUserId() > acc2.getUserId()) {
+                synchronized (acc2) {
+                    if (acc1.getBalance() < amout) {
+                        mailer.addToQ(0);
+
+                        return;
+                    }
+                    synchronized (acc1) {
+
+                        trans();
+                    }
+                }
+            }
+
+            else {
+                synchronized (acc1) {
+                    if (acc1.getBalance() < amout) {
+                        mailer.addToQ(0);
+
+                        return;
+                    }
+                    synchronized (acc2) {
+
+                        trans();
+                    }
+                }
+            }
+        }
+
+        private void trans () {
+            acc1.setBalance(acc1.getBalance() - amout);
+            acc2.setBalance(acc2.getBalance() + amout);
+
+            mailer.addToQ(1);
+        }
     }
 }

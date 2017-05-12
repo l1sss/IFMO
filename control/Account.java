@@ -5,8 +5,8 @@ package control;
  */
 public class Account {
     private static int id;
-    private int userId;
-    private String userName;
+    private final int userId;
+    private final String userName;
     private int balance;
 
     public Account(String userName, int balance) {
@@ -19,11 +19,15 @@ public class Account {
         return userId;
     }
 
-    public synchronized int getBalance() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public int getBalance() {
         return balance;
     }
 
-    public synchronized void setBalance(int balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 
@@ -47,7 +51,7 @@ public class Account {
         return "Account{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", balance=" + balance +
+                ", balance=" + balance + "$" +
                 '}';
     }
 }
