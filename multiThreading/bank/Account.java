@@ -1,4 +1,4 @@
-package control;
+package multiThreading.bank;
 
 /**
  * Created by l1s on 10.05.17.

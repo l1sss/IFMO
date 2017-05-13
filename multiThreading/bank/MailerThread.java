@@ -1,4 +1,4 @@
-package control;
+package multiThreading.bank;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,16 +24,12 @@ public class MailerThread implements Runnable {
                         System.err.println("not enough money");
                         break;
 
-                    case -1:
-                        System.err.println("incorrect user");
-                        break;
-
                     default:
                         System.err.println("something broke");
                 }
 
             } catch (InterruptedException e) {
-                System.err.println("Mailer off in process");
+                Thread.currentThread().interrupt();
             }
         }
     }
