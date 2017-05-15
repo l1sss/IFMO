@@ -33,7 +33,6 @@ public class Bank {
         }
     }
 
-
     private Account getLowId(Account acc1, Account acc2) {
         if (acc1.equals(acc2))
             return acc1;

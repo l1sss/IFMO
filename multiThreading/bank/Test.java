@@ -12,7 +12,7 @@ public class Test {
 
         List<Account> accounts = new ArrayList<>();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             accounts.add(new Account("user" + i, 1000));
         }
 

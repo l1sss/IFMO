@@ -19,10 +19,6 @@ public class Account {
         return userId;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     public int getBalance() {
         return balance;
     }
