@@ -11,8 +11,8 @@ import java.time.temporal.ChronoUnit;
  */
 public class DateTimer {
     public static void main(String[] args) {
-        Period period = period(LocalDate.of(2020, Month.JUNE, 24));
-        LocalTime time = difTime(LocalTime.of(16, 30));
+        Period period = period(LocalDate.of(2018, Month.JANUARY, 1));
+        LocalTime time = difTime(LocalTime.of(0, 0));
 
         int years = period.getYears();
         int months = period.getMonths();
